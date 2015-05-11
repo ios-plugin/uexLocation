@@ -1,0 +1,358 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
+		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
+		5A501961188FCFD20022E07C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* Location.m */; };
+		5A501962188FCFD20022E07C /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A50195E188FCFD20022E07C /* SVGeocoder.m */; };
+		5A501963188FCFD20022E07C /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501960188FCFD20022E07C /* SVPlacemark.m */; };
+		F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5A501927188FCF990022E07C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5A501929188FCF990022E07C /* libuexLocation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexLocation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A50192C188FCF990022E07C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5A501930188FCF990022E07C /* EUExLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EUExLocation-Prefix.pch"; sourceTree = "<group>"; };
+		5A501933188FCF990022E07C /* EUExLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExLocation.m; sourceTree = "<group>"; };
+		5A501953188FCFD20022E07C /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
+		5A501954188FCFD20022E07C /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
+		5A501955188FCFD20022E07C /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
+		5A501957188FCFD20022E07C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		5A501958188FCFD20022E07C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		5A50195B188FCFD20022E07C /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		5A50195C188FCFD20022E07C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		5A50195D188FCFD20022E07C /* SVGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGeocoder.h; sourceTree = "<group>"; };
+		5A50195E188FCFD20022E07C /* SVGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGeocoder.m; sourceTree = "<group>"; };
+		5A50195F188FCFD20022E07C /* SVPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlacemark.h; sourceTree = "<group>"; };
+		5A501960188FCFD20022E07C /* SVPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlacemark.m; sourceTree = "<group>"; };
+		F7A53BD919C6849500CA9EEE /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		F7A53BDB19C6849500CA9EEE /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		F7A53BDC19C6849500CA9EEE /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		F7A53BDD19C6849500CA9EEE /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		F7A53BDE19C6849500CA9EEE /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		F7A53BDF19C6849500CA9EEE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		F7ADC4C21999E71C00F63C09 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
+		F7B3BCD519C95E55004CEAEC /* JZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZLocationConverter.h; sourceTree = "<group>"; };
+		F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZLocationConverter.m; sourceTree = "<group>"; };
+		FC61C70118AB646900B2C1C5 /* EUExLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExLocation.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5A501926188FCF990022E07C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A501920188FCF990022E07C = {
+			isa = PBXGroup;
+			children = (
+				5A50192E188FCF990022E07C /* EUExLocation */,
+				5A50192B188FCF990022E07C /* Frameworks */,
+				5A50192A188FCF990022E07C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5A50192A188FCF990022E07C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A501929188FCF990022E07C /* libuexLocation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A50192B188FCF990022E07C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5A50192C188FCF990022E07C /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A50192E188FCF990022E07C /* EUExLocation */ = {
+			isa = PBXGroup;
+			children = (
+				FC61C70118AB646900B2C1C5 /* EUExLocation.h */,
+				5A501933188FCF990022E07C /* EUExLocation.m */,
+				5A501952188FCFD20022E07C /* engineHeader */,
+				5A501956188FCFD20022E07C /* sourceCode */,
+				5A50192F188FCF990022E07C /* Supporting Files */,
+			);
+			path = EUExLocation;
+			sourceTree = "<group>";
+		};
+		5A50192F188FCF990022E07C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5A501930188FCF990022E07C /* EUExLocation-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5A501952188FCFD20022E07C /* engineHeader */ = {
+			isa = PBXGroup;
+			children = (
+				F7A53BD919C6849500CA9EEE /* JSON.h */,
+				F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */,
+				F7A53BDB19C6849500CA9EEE /* NSString+SBJSON.h */,
+				F7A53BDC19C6849500CA9EEE /* SBJSON.h */,
+				F7A53BDD19C6849500CA9EEE /* SBJsonBase.h */,
+				F7A53BDE19C6849500CA9EEE /* SBJsonParser.h */,
+				F7A53BDF19C6849500CA9EEE /* SBJsonWriter.h */,
+				F7ADC4C21999E71C00F63C09 /* Reachability.h */,
+				5A501953188FCFD20022E07C /* EUExBase.h */,
+				5A501954188FCFD20022E07C /* EUExBaseDefine.h */,
+				5A501955188FCFD20022E07C /* EUtility.h */,
+			);
+			path = engineHeader;
+			sourceTree = "<group>";
+		};
+		5A501956188FCFD20022E07C /* sourceCode */ = {
+			isa = PBXGroup;
+			children = (
+				F7B3BCD519C95E55004CEAEC /* JZLocationConverter.h */,
+				F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */,
+				5A501957188FCFD20022E07C /* Location.h */,
+				5A501958188FCFD20022E07C /* Location.m */,
+				5A501959188FCFD20022E07C /* SVGeocoder */,
+			);
+			path = sourceCode;
+			sourceTree = "<group>";
+		};
+		5A501959188FCFD20022E07C /* SVGeocoder */ = {
+			isa = PBXGroup;
+			children = (
+				5A50195A188FCFD20022E07C /* JSONKit */,
+				5A50195C188FCFD20022E07C /* LICENSE.txt */,
+				5A50195D188FCFD20022E07C /* SVGeocoder.h */,
+				5A50195E188FCFD20022E07C /* SVGeocoder.m */,
+				5A50195F188FCFD20022E07C /* SVPlacemark.h */,
+				5A501960188FCFD20022E07C /* SVPlacemark.m */,
+			);
+			path = SVGeocoder;
+			sourceTree = "<group>";
+		};
+		5A50195A188FCFD20022E07C /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				5A50195B188FCFD20022E07C /* JSONKit.h */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5A501928188FCF990022E07C /* EUExLocation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A50194C188FCF9A0022E07C /* Build configuration list for PBXNativeTarget "EUExLocation" */;
+			buildPhases = (
+				5A501925188FCF990022E07C /* Sources */,
+				5A501926188FCF990022E07C /* Frameworks */,
+				5A501927188FCF990022E07C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EUExLocation;
+			productName = EUExLocation;
+			productReference = 5A501929188FCF990022E07C /* libuexLocation.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A501921188FCF990022E07C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = xll;
+			};
+			buildConfigurationList = 5A501924188FCF990022E07C /* Build configuration list for PBXProject "EUExLocation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5A501920188FCF990022E07C;
+			productRefGroup = 5A50192A188FCF990022E07C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A501928188FCF990022E07C /* EUExLocation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A501925188FCF990022E07C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A501962188FCFD20022E07C /* SVGeocoder.m in Sources */,
+				5A501963188FCFD20022E07C /* SVPlacemark.m in Sources */,
+				5A501961188FCFD20022E07C /* Location.m in Sources */,
+				F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */,
+				5A501934188FCF990022E07C /* EUExLocation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5A50194A188FCF9A0022E07C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexLocation/";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/uexLocation/";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5A50194B188FCF9A0022E07C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexLocation/";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/uexLocation/";
+				INFOPLIST_PREPROCESS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5A50194D188FCF9A0022E07C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/EUExLocation.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EUExLocation/EUExLocation-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = uexLocation;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5A50194E188FCF9A0022E07C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				DSTROOT = /tmp/EUExLocation.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EUExLocation/EUExLocation-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = uexLocation;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A501924188FCF990022E07C /* Build configuration list for PBXProject "EUExLocation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A50194A188FCF9A0022E07C /* Debug */,
+				5A50194B188FCF9A0022E07C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A50194C188FCF9A0022E07C /* Build configuration list for PBXNativeTarget "EUExLocation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A50194D188FCF9A0022E07C /* Debug */,
+				5A50194E188FCF9A0022E07C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5A501921188FCF990022E07C /* Project object */;
+}

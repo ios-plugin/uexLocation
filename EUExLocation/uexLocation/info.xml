@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<uexplugins>
+    <plugin
+        uexName="uexLocation" version="3.0.16" build="16">
+        <info>16.设备未开启定位服务时,跳转到系统的定位设置页面</info>
+        <build>15.定位模式更改为NSLocationWhenInUseUsageDescription</build>
+        <build>14.修改plugin.xml文件</build>
+        <build>13.修复city字段获取不到的BUG.</build>
+        <build>12.增加getBaiduFromGoogle接口以及修改返回地址的json格式.</build>
+        <build>11.修改返回地址的格式.</build>
+        <build>10:修复在iOS5上获取地址失败的bug</build>
+        <build>9:返回的json格式地址与Android保持统一</build>
+        <build>8:修复uexLocation定位闪退</build>
+        <build>7:添加定位所需要的plist文件</build>
+        <build>6:支持iOS8.0定位</build>
+        <build>5:支持iOS6.0以下版本</build>
+        <build>4:添加json格式地址的参数</build>
+        <build>3:重写uexLocation定位功能</build>
+        <build>2:重写uexLocation定位功能</build>
+        <build>1:修复经纬度反向解析地址时，无法获取地址的BUG </build>
+        <build>0:获取当前定位和地址功能插件</build>
+    </plugin>
+</uexplugins>

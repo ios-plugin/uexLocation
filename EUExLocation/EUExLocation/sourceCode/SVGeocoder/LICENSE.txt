@@ -1,0 +1,39 @@
+Copyright (c) 2011 Sam Vermette
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+A different license may apply to other software included in this package, 
+including John Engelhart's JSONKit class. Please consult their 
+respective headers for the terms of their individual licenses.
+
+
+但是直接用系统的方法，可能会遇到下面的错误，直接崩溃:
+/SourceCache/ProtocolBuffer_Sim/ProtocolBuffer-26/Runtime/PBRequester.m:523 server returned error: 503
+//注释：我上网查了资料，这个代理方法的原理是向谷歌服务器请求的，由谷歌服务器完成这个这个命令，但是谷歌服务器会做一个判断，60s内不能进行重复的请求，如果重复请求的次数过多，谷歌会认为你是在测试，这样谷歌回终止你的服务，如果次数过多还可能使你 的程序直接崩溃（gdb），这是个严重的BUG，我纠结了好长时间，但是在看别人的程序时，完全可以支持重复请求的，我纠结了好长时间，最后在网上找到了两个源码，很是给力，老外的开源精神确实伟大！
+
+下面的代码能完美支持“城市名和经纬度的正反向编译”，不会出现上面的错误
+https://github.com/mjisrawi/iOS-Geocoding-Services
+https://github.com/samvermette/SVGeocoder
+用法：http://samvermette.com/164
+
+
+CoreLocation, MapKit and AddressBook 

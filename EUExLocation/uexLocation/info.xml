@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexLocation" version="3.0.16" build="16">
-        <info>16.设备未开启定位服务时,跳转到系统的定位设置页面</info>
+        uexName="uexLocation" version="3.0.17" build="17">
+        <info>17.修复定位过程中出现的崩溃问题</info>
+        <build>16.设备未开启定位服务时,跳转到系统的定位设置页面</build>
         <build>15.定位模式更改为NSLocationWhenInUseUsageDescription</build>
         <build>14.修改plugin.xml文件</build>
         <build>13.修复city字段获取不到的BUG.</build>

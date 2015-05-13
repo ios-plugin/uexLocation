@@ -155,17 +155,17 @@
                                     placemark.thoroughfare,
                                     placemark.subThoroughfare,
                                     placemark.name];
-               
+                
                 formattedAddress = [self getFormattedAddress:formattedAddress];
                 
-//                city = [NSString stringWithFormat:@"%@",placemark.subAdministrativeArea];
+                //                city = [NSString stringWithFormat:@"%@",placemark.subAdministrativeArea];
                 city = [NSString stringWithFormat:@"%@",placemark.locality];
                 
-                 if([self isBeiJingCity:placemark.administrativeArea]) {
+                if([self isBeiJingCity:placemark.administrativeArea]) {
                     city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
-                 }
+                }
                 
-                 NSMutableDictionary *addressDict=[NSMutableDictionary dictionary];
+                NSMutableDictionary *addressDict=[NSMutableDictionary dictionary];
                 if(placemark.administrativeArea){
                     [addressDict setObject:placemark.administrativeArea forKey:@"province"];
                 }
@@ -183,12 +183,15 @@
                 }
                 if (city) {
                     [addressDict setObject:city forKey:@"city"];
- 
+                    
                 }
                 address = [addressDict JSONFragment];
                 
                 addressAll = [NSString stringWithFormat:@"%@;%@;%@",formattedAddress,_locationStr,address];
-                [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
+                //对象是否实现了某个方法
+                if([euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]){
+                    [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
+                }
             }
         }];
         [geocoder release];
@@ -214,7 +217,7 @@
     NSString *addressAll = nil;
     NSString *city = nil;
     
-    formattedAddress = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@",
+    formattedAddress = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@",
                placemark.country,
                placemark.countryCode,
                placemark.administrativeArea,
@@ -222,14 +225,21 @@
                placemark.locality,
                placemark.subLocality,
                placemark.thoroughfare,
-               placemark.subThoroughfare];
+               placemark.subThoroughfare,
+               placemark.name];
     formattedAddress = [self getFormattedAddress:formattedAddress];
     
-    city = [NSString stringWithFormat:@"%@",placemark.subAdministrativeArea];
-    if ([city isEqualToString:@"(null)"]) {
-        
+    city = [NSString stringWithFormat:@"%@",placemark.locality];
+    
+    if([self isBeiJingCity:placemark.administrativeArea]) {
         city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
     }
+    
+//    city = [NSString stringWithFormat:@"%@",placemark.subAdministrativeArea];
+//    if ([city isEqualToString:@"(null)"]) {
+//        
+//        city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
+//    }
     NSMutableDictionary *addressDict=[NSMutableDictionary dictionary];
     if(placemark.administrativeArea){
         [addressDict setObject:placemark.administrativeArea forKey:@"province"];
@@ -253,7 +263,9 @@
     address = [addressDict JSONFragment];
     
     addressAll = [NSString stringWithFormat:@"%@;%@;%@",formattedAddress,_locationStr,address];
-    [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
+    if ([euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]) {
+        [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
+    }
 }
 
 -(NSString *)getFormattedAddress:(NSString *)str {
@@ -324,17 +336,23 @@
         [gps release];
         gps = nil;
     }
+    if (euexObj) {
+        [euexObj release];
+        euexObj = nil;
+    }
 }
 -(void)delloc{
     NSLog(@"hui-->uexLocation-->Location-->delloc");
-    if (gps) {
-        [gps stopUpdatingLocation];
-        [gps release];
-        gps = nil;
+    //    if (gps) {
+    //        [gps stopUpdatingLocation];
+    //        [gps release];
+    //        gps = nil;
+    //    }
+    [self closeLocation];
+    if (_locationStr) {
+        [_locationStr release];
+        _locationStr = nil;
     }
-    [_locationStr release];
-    _locationStr = nil;
-    
     [super dealloc];
 }
 @end

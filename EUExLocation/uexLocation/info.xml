@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexLocation" version="3.0.17" build="17">
-        <info>17.修复定位过程中出现的崩溃问题</info>
+        uexName="uexLocation" version="3.0.18" build="18">
+        <info>18.修复因数组越界造成的奔溃</info>
+        <build>17.修复定位过程中出现的崩溃问题</build>
         <build>16.设备未开启定位服务时,跳转到系统的定位设置页面</build>
         <build>15.定位模式更改为NSLocationWhenInUseUsageDescription</build>
         <build>14.修改plugin.xml文件</build>

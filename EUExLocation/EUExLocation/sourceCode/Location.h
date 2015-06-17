@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#define KUEX_IS_NSString(x) ([x isKindOfClass:[NSString class]] && x.length>0&&(![x isEqualToString:@"(null)"]))
 
 @class EUExLocation;
 

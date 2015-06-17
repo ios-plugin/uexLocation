@@ -105,7 +105,7 @@
     [self.meBrwView stringByEvaluatingJavaScriptFromString:jsStr];
 }
 //地址回调
--(void)uexLocationWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString *)inData{
+-(void)uexLocationWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString *)inData {
     
     if (inData) {
         NSMutableArray *array=(NSMutableArray *)[inData componentsSeparatedByString:@";"];

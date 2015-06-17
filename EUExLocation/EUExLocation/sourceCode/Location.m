@@ -34,7 +34,6 @@
             if ([inArguments[0] intValue]==0) {
                 gps.desiredAccuracy=kCLLocationAccuracyBest;
             }
-            
             if ([inArguments[0] intValue]==1) {
                 gps.desiredAccuracy=kCLLocationAccuracyNearestTenMeters;
             }
@@ -139,40 +138,44 @@
         [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *array,NSError *error) {
             
             if (array.count > 0) {
-                
                 CLPlacemark *placemark = [array objectAtIndex:0];
-                NSString *address =	nil;
-                NSString *formattedAddress = nil;
-                NSString *addressAll = nil;
-                NSString *city = nil;
-                formattedAddress = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@",
-                                    placemark.country,
-                                    placemark.ISOcountryCode,
-                                    placemark.administrativeArea,
-                                    placemark.subAdministrativeArea,
-                                    placemark.locality,
-                                    placemark.subLocality,
-                                    placemark.thoroughfare,
-                                    placemark.subThoroughfare,
-                                    placemark.name];
-                
-                formattedAddress = [self getFormattedAddress:formattedAddress];
-                
-                //                city = [NSString stringWithFormat:@"%@",placemark.subAdministrativeArea];
-                city = [NSString stringWithFormat:@"%@",placemark.locality];
-                
-                if([self isBeiJingCity:placemark.administrativeArea]) {
-                    city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
+                NSString *address =	@"";
+                NSString *addressAll = @"";
+                NSString *city = @"";
+                NSString *getAddress=[NSString stringWithFormat:@"%@",placemark.country];
+                if (KUEX_IS_NSString(placemark.administrativeArea)) {
+                    getAddress=[getAddress stringByAppendingString:placemark.administrativeArea];
                 }
-                
+                if (KUEX_IS_NSString(placemark.subAdministrativeArea)) {
+                    getAddress=[getAddress stringByAppendingString:placemark.subAdministrativeArea];
+                }
+                if (KUEX_IS_NSString(placemark.locality)) {
+                    getAddress=[getAddress stringByAppendingString: placemark.locality];
+                }
+                if (KUEX_IS_NSString(placemark.subLocality)) {
+                    getAddress=[getAddress stringByAppendingString:placemark.subLocality];
+                }
+                if (KUEX_IS_NSString(placemark.thoroughfare)) {
+                    getAddress=[getAddress stringByAppendingString:placemark.thoroughfare];
+                }
+                if (KUEX_IS_NSString(placemark.subThoroughfare)) {
+                    getAddress=[getAddress stringByAppendingString:placemark.subThoroughfare];
+                }
+                if (KUEX_IS_NSString(placemark.locality)) {
+                    city = [NSString stringWithFormat:@"%@",placemark.locality];
+                }
+                if([self isBeiJingCity:placemark.administrativeArea]) {
+                    if (KUEX_IS_NSString(placemark.administrativeArea)) {
+                        city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
+                    }
+                }
                 NSMutableDictionary *addressDict=[NSMutableDictionary dictionary];
                 if(placemark.administrativeArea){
                     [addressDict setObject:placemark.administrativeArea forKey:@"province"];
                 }
                 if (placemark.subThoroughfare) {
                     [addressDict setObject:placemark.subThoroughfare forKey:@"street_number"];
-                }
-                else{
+                } else {
                     [addressDict setObject:@"(null)" forKey:@"street_number"];
                 }
                 if (placemark.subLocality) {
@@ -183,13 +186,11 @@
                 }
                 if (city) {
                     [addressDict setObject:city forKey:@"city"];
-                    
                 }
                 address = [addressDict JSONFragment];
-                
-                addressAll = [NSString stringWithFormat:@"%@;%@;%@",formattedAddress,_locationStr,address];
+                addressAll = [NSString stringWithFormat:@"%@;%@;%@",getAddress,_locationStr,address];
                 //对象是否实现了某个方法
-                if([euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]){
+                if(euexObj&&[euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]){
                     [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
                 }
             }
@@ -206,48 +207,48 @@
     MKReverseGeocoder *geoCoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate2D];
     geoCoder.delegate = self;
     [geoCoder start];
-    
 }
 
 //ios6--
 -(void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
 {
-    NSString *address =	nil;
-    NSString *formattedAddress = nil;
-    NSString *addressAll = nil;
-    NSString *city = nil;
-    
-    formattedAddress = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@",
-               placemark.country,
-               placemark.countryCode,
-               placemark.administrativeArea,
-               placemark.subAdministrativeArea,
-               placemark.locality,
-               placemark.subLocality,
-               placemark.thoroughfare,
-               placemark.subThoroughfare,
-               placemark.name];
-    formattedAddress = [self getFormattedAddress:formattedAddress];
-    
-    city = [NSString stringWithFormat:@"%@",placemark.locality];
-    
-    if([self isBeiJingCity:placemark.administrativeArea]) {
-        city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
+    NSString *address =	@"";
+    NSString *addressAll = @"";
+    NSString *city = @"";
+    NSString *getAddress=[NSString stringWithFormat:@"%@",placemark.country];
+    if (KUEX_IS_NSString(placemark.administrativeArea)) {
+        getAddress=[getAddress stringByAppendingString:placemark.administrativeArea];
     }
-    
-//    city = [NSString stringWithFormat:@"%@",placemark.subAdministrativeArea];
-//    if ([city isEqualToString:@"(null)"]) {
-//        
-//        city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
-//    }
+    if (KUEX_IS_NSString(placemark.subAdministrativeArea)) {
+        getAddress=[getAddress stringByAppendingString:placemark.subAdministrativeArea];
+    }
+    if (KUEX_IS_NSString(placemark.locality)) {
+        getAddress=[getAddress stringByAppendingString: placemark.locality];
+    }
+    if (KUEX_IS_NSString(placemark.subLocality)) {
+        getAddress=[getAddress stringByAppendingString:placemark.subLocality];
+    }
+    if (KUEX_IS_NSString(placemark.thoroughfare)) {
+        getAddress=[getAddress stringByAppendingString:placemark.thoroughfare];
+    }
+    if (KUEX_IS_NSString(placemark.subThoroughfare)) {
+        getAddress=[getAddress stringByAppendingString:placemark.subThoroughfare];
+    }
+    if (KUEX_IS_NSString(placemark.locality)) {
+        city = [NSString stringWithFormat:@"%@",placemark.locality];
+    }
+    if([self isBeiJingCity:placemark.administrativeArea]) {
+        if (KUEX_IS_NSString(placemark.administrativeArea)) {
+            city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
+        }
+    }
     NSMutableDictionary *addressDict=[NSMutableDictionary dictionary];
     if(placemark.administrativeArea){
         [addressDict setObject:placemark.administrativeArea forKey:@"province"];
     }
     if (placemark.subThoroughfare) {
         [addressDict setObject:placemark.subThoroughfare forKey:@"street_number"];
-    }
-    else{
+    } else {
         [addressDict setObject:@"(null)" forKey:@"street_number"];
     }
     if (placemark.subLocality) {
@@ -258,60 +259,15 @@
     }
     if (city) {
         [addressDict setObject:city forKey:@"city"];
-        
     }
     address = [addressDict JSONFragment];
     
-    addressAll = [NSString stringWithFormat:@"%@;%@;%@",formattedAddress,_locationStr,address];
-    if ([euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]) {
+    addressAll = [NSString stringWithFormat:@"%@;%@;%@",getAddress,_locationStr,address];
+    if (euexObj&&[euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]) {
         [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
     }
 }
 
--(NSString *)getFormattedAddress:(NSString *)str {
-    
-    NSString *getAddress=nil;
-    if (str) {
-        NSMutableArray *array=(NSMutableArray *)[str componentsSeparatedByString:@","];
-        NSMutableDictionary *jsonDict=[NSMutableDictionary dictionary];
-        NSArray *arrayKey=[NSArray arrayWithObjects:@"country",@"countryCode",@"administrativeArea",@"subAdministrativeArea",@"locality",@"subLocality",@"thoroughfare",@"subThoroughfare",@"name" ,nil];
-        for (int i=0;i<[array count] ; i++) {
-            NSString *value=[NSString stringWithFormat:@"%@",[array objectAtIndex:i]];
-            NSString *key=[NSString stringWithFormat:@"%@",[arrayKey objectAtIndex:i]];
-            [jsonDict setValue:value forKey:key];
-        }
-            NSString *country=[jsonDict objectForKey:@"country"];
-            NSString *administrativeArea=[jsonDict objectForKey:@"administrativeArea"];
-            NSString *subAdministrativeArea=[jsonDict objectForKey:@"subAdministrativeArea"];
-            NSString *locality=[jsonDict objectForKey:@"locality"];
-            NSString *subLocality=[jsonDict objectForKey:@"subLocality"];
-            NSString *thoroughfare=[jsonDict objectForKey:@"thoroughfare"];
-            NSString *subThoroughfare=[jsonDict objectForKey:@"subThoroughfare"];
-            
-            getAddress=[NSString stringWithFormat:@"%@",country];
-            
-            if (![administrativeArea isEqualToString:@"(null)"]) {
-                getAddress=[getAddress stringByAppendingString:administrativeArea];
-            }
-            if (![subAdministrativeArea isEqualToString:@"(null)"]) {
-                getAddress=[getAddress stringByAppendingString:subAdministrativeArea];
-            }
-            if (![locality isEqualToString:@"(null)"]) {
-                getAddress=[getAddress stringByAppendingString:locality];
-            }
-            if (![subLocality isEqualToString:@"(null)"]) {
-                getAddress=[getAddress stringByAppendingString:subLocality];
-            }
-            if (![thoroughfare isEqualToString:@"(null)"]) {
-                getAddress=[getAddress stringByAppendingString:thoroughfare];
-            }
-            if (![subThoroughfare isEqualToString:@"(null)"]) {
-                getAddress=[getAddress stringByAppendingString:subThoroughfare];
-            }
-        }
-    
-    return getAddress;
-}
 - (BOOL)isBeiJingCity:(NSString *)city {
     
     if ([city hasPrefix:@"北京"]) {
@@ -327,8 +283,8 @@
         return YES;
     }
     return NO;
-    
 }
+
 -(void)closeLocation{
     NSLog(@"hui-->uexLocation-->Location-->closeLocation");
     if (gps) {

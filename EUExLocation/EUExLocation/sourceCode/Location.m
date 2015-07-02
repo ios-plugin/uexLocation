@@ -292,19 +292,14 @@
         [gps release];
         gps = nil;
     }
-    if (euexObj) {
-        [euexObj release];
-        euexObj = nil;
-    }
 }
 -(void)delloc{
     NSLog(@"hui-->uexLocation-->Location-->delloc");
-    //    if (gps) {
-    //        [gps stopUpdatingLocation];
-    //        [gps release];
-    //        gps = nil;
-    //    }
-    [self closeLocation];
+    if (gps) {
+        [gps stopUpdatingLocation];
+        [gps release];
+        gps = nil;
+    }
     if (_locationStr) {
         [_locationStr release];
         _locationStr = nil;

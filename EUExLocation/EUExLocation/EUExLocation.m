@@ -65,7 +65,7 @@
     
     if (-90<[inLatitude intValue]<90||-180<[inLongitude intValue]<180) {
         if (![self isConnectionAvailable]){
-            [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:@"无网络连接,请检查你的网络"];
+            [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         }
         else{
             [myLocation getAddressWithLot:inLongitude Lat:inLatitude];

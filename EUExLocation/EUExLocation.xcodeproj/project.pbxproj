@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C1AD5B81BD60F140091D2A1 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C1AD5BA1BD60F140091D2A1 /* Localizable.strings */; };
 		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
 		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
 		5A501961188FCFD20022E07C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* Location.m */; };
@@ -14,6 +15,16 @@
 		5A501963188FCFD20022E07C /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501960188FCFD20022E07C /* SVPlacemark.m */; };
 		F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C1AD5B41BD60ED40091D2A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A501921188FCF990022E07C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C1AD5AD1BD60E9E0091D2A1;
+			remoteInfo = uexLocationBundle;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5A501927188FCF990022E07C /* CopyFiles */ = {
@@ -28,6 +39,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C1AD5AE1BD60E9E0091D2A1 /* uexLocation.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uexLocation.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C1AD5B01BD60E9E0091D2A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C1AD5B91BD60F140091D2A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3C1AD5BB1BD60F200091D2A1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		5A501929188FCF990022E07C /* libuexLocation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexLocation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A50192C188FCF990022E07C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A501930188FCF990022E07C /* EUExLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EUExLocation-Prefix.pch"; sourceTree = "<group>"; };
@@ -57,6 +72,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3C1AD5AB1BD60E9E0091D2A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5A501926188FCF990022E07C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,10 +90,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C1AD5AF1BD60E9E0091D2A1 /* uexLocationBundle */ = {
+			isa = PBXGroup;
+			children = (
+				3C1AD5B01BD60E9E0091D2A1 /* Info.plist */,
+			);
+			path = uexLocationBundle;
+			sourceTree = "<group>";
+		};
 		5A501920188FCF990022E07C = {
 			isa = PBXGroup;
 			children = (
+				3C1AD5BA1BD60F140091D2A1 /* Localizable.strings */,
 				5A50192E188FCF990022E07C /* EUExLocation */,
+				3C1AD5AF1BD60E9E0091D2A1 /* uexLocationBundle */,
 				5A50192B188FCF990022E07C /* Frameworks */,
 				5A50192A188FCF990022E07C /* Products */,
 			);
@@ -81,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				5A501929188FCF990022E07C /* libuexLocation.a */,
+				3C1AD5AE1BD60E9E0091D2A1 /* uexLocation.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +200,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3C1AD5AD1BD60E9E0091D2A1 /* uexLocationBundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C1AD5B31BD60E9E0091D2A1 /* Build configuration list for PBXNativeTarget "uexLocationBundle" */;
+			buildPhases = (
+				3C1AD5AA1BD60E9E0091D2A1 /* Sources */,
+				3C1AD5AB1BD60E9E0091D2A1 /* Frameworks */,
+				3C1AD5AC1BD60E9E0091D2A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = uexLocationBundle;
+			productName = uexLocationBundle;
+			productReference = 3C1AD5AE1BD60E9E0091D2A1 /* uexLocation.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 		5A501928188FCF990022E07C /* EUExLocation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5A50194C188FCF9A0022E07C /* Build configuration list for PBXNativeTarget "EUExLocation" */;
@@ -178,6 +228,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3C1AD5B51BD60ED40091D2A1 /* PBXTargetDependency */,
 			);
 			name = EUExLocation;
 			productName = EUExLocation;
@@ -192,6 +243,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = xll;
+				TargetAttributes = {
+					3C1AD5AD1BD60E9E0091D2A1 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
 			};
 			buildConfigurationList = 5A501924188FCF990022E07C /* Build configuration list for PBXProject "EUExLocation" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -199,6 +255,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 5A501920188FCF990022E07C;
 			productRefGroup = 5A50192A188FCF990022E07C /* Products */;
@@ -206,11 +263,30 @@
 			projectRoot = "";
 			targets = (
 				5A501928188FCF990022E07C /* EUExLocation */,
+				3C1AD5AD1BD60E9E0091D2A1 /* uexLocationBundle */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		3C1AD5AC1BD60E9E0091D2A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C1AD5B81BD60F140091D2A1 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		3C1AD5AA1BD60E9E0091D2A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5A501925188FCF990022E07C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -225,7 +301,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3C1AD5B51BD60ED40091D2A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C1AD5AD1BD60E9E0091D2A1 /* uexLocationBundle */;
+			targetProxy = 3C1AD5B41BD60ED40091D2A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3C1AD5BA1BD60F140091D2A1 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C1AD5B91BD60F140091D2A1 /* en */,
+				3C1AD5BB1BD60F200091D2A1 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		3C1AD5B11BD60E9E0091D2A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = uexLocationBundle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zywx.uexLocationBundle;
+				PRODUCT_MODULE_NAME = uexLocation;
+				PRODUCT_NAME = uexLocation;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		3C1AD5B21BD60E9E0091D2A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = uexLocationBundle/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zywx.uexLocationBundle;
+				PRODUCT_MODULE_NAME = uexLocation;
+				PRODUCT_NAME = uexLocation;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		5A50194A188FCF9A0022E07C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -334,6 +479,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3C1AD5B31BD60E9E0091D2A1 /* Build configuration list for PBXNativeTarget "uexLocationBundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C1AD5B11BD60E9E0091D2A1 /* Debug */,
+				3C1AD5B21BD60E9E0091D2A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		5A501924188FCF990022E07C /* Build configuration list for PBXProject "EUExLocation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

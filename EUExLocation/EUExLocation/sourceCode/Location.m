@@ -106,7 +106,7 @@
         
     }
     else{
-        [euexObj jsSuccessWithName:@"uexLocation.onChange" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:@"获取经纬度失败"];
+        [euexObj jsSuccessWithName:@"uexLocation.onChange" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"获取经纬度失败")];
     }
 }
 
@@ -270,16 +270,16 @@
 
 - (BOOL)isBeiJingCity:(NSString *)city {
     
-    if ([city hasPrefix:@"北京"]) {
+    if ([city hasPrefix:UEX_LOCALIZEDSTRING(@"北京")]) {
         return YES;
     }
-    if ([city hasPrefix:@"上海"]) {
+    if ([city hasPrefix:UEX_LOCALIZEDSTRING(@"上海")]) {
         return YES;
     }
-    if ([city hasPrefix:@"重庆"]) {
+    if ([city hasPrefix:UEX_LOCALIZEDSTRING(@"重庆")]) {
         return YES;
     }
-    if ([city hasPrefix:@"天津"]) {
+    if ([city hasPrefix:UEX_LOCALIZEDSTRING(@"天津")]) {
         return YES;
     }
     return NO;

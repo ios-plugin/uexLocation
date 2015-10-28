@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  EUExLocation
-
-  Created by 黄锦 on 15/10/20.
-  Copyright © 2015年 xll. All rights reserved.
-*/
+/*
+ Localizable.strings
+ EUExLocation
+ 
+ Created by 黄锦 on 15/10/20.
+ Copyright © 2015年 xll. All rights reserved.
+ */
 "无网络连接,请检查你的网络"="No network connection, please check your network";
 "获取经纬度失败"="To obtain the latitude and longitude of the failure";
 "北京"="BaiJing";

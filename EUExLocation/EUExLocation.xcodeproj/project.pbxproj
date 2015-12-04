@@ -11,8 +11,6 @@
 		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
 		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
 		5A501961188FCFD20022E07C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* Location.m */; };
-		5A501962188FCFD20022E07C /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A50195E188FCFD20022E07C /* SVGeocoder.m */; };
-		5A501963188FCFD20022E07C /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501960188FCFD20022E07C /* SVPlacemark.m */; };
 		F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */; };
 /* End PBXBuildFile section */
 
@@ -51,12 +49,7 @@
 		5A501955188FCFD20022E07C /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
 		5A501957188FCFD20022E07C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		5A501958188FCFD20022E07C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		5A50195B188FCFD20022E07C /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		5A50195C188FCFD20022E07C /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		5A50195D188FCFD20022E07C /* SVGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGeocoder.h; sourceTree = "<group>"; };
-		5A50195E188FCFD20022E07C /* SVGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGeocoder.m; sourceTree = "<group>"; };
-		5A50195F188FCFD20022E07C /* SVPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlacemark.h; sourceTree = "<group>"; };
-		5A501960188FCFD20022E07C /* SVPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlacemark.m; sourceTree = "<group>"; };
+		F71D523D1C0EEE1F00CB4E57 /* EBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBrowserView.h; sourceTree = "<group>"; };
 		F7A53BD919C6849500CA9EEE /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		F7A53BDB19C6849500CA9EEE /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
@@ -147,6 +140,7 @@
 		5A501952188FCFD20022E07C /* engineHeader */ = {
 			isa = PBXGroup;
 			children = (
+				F71D523D1C0EEE1F00CB4E57 /* EBrowserView.h */,
 				F7A53BD919C6849500CA9EEE /* JSON.h */,
 				F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */,
 				F7A53BDB19C6849500CA9EEE /* NSString+SBJSON.h */,
@@ -169,30 +163,8 @@
 				F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */,
 				5A501957188FCFD20022E07C /* Location.h */,
 				5A501958188FCFD20022E07C /* Location.m */,
-				5A501959188FCFD20022E07C /* SVGeocoder */,
 			);
 			path = sourceCode;
-			sourceTree = "<group>";
-		};
-		5A501959188FCFD20022E07C /* SVGeocoder */ = {
-			isa = PBXGroup;
-			children = (
-				5A50195A188FCFD20022E07C /* JSONKit */,
-				5A50195C188FCFD20022E07C /* LICENSE.txt */,
-				5A50195D188FCFD20022E07C /* SVGeocoder.h */,
-				5A50195E188FCFD20022E07C /* SVGeocoder.m */,
-				5A50195F188FCFD20022E07C /* SVPlacemark.h */,
-				5A501960188FCFD20022E07C /* SVPlacemark.m */,
-			);
-			path = SVGeocoder;
-			sourceTree = "<group>";
-		};
-		5A50195A188FCFD20022E07C /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				5A50195B188FCFD20022E07C /* JSONKit.h */,
-			);
-			path = JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,8 +261,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A501962188FCFD20022E07C /* SVGeocoder.m in Sources */,
-				5A501963188FCFD20022E07C /* SVPlacemark.m in Sources */,
 				5A501961188FCFD20022E07C /* Location.m in Sources */,
 				F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */,
 				5A501934188FCF990022E07C /* EUExLocation.m in Sources */,
@@ -377,7 +347,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -405,7 +375,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/uexLocation/";
 				INFOPLIST_PREPROCESS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
@@ -419,7 +389,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -441,7 +411,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/uexLocation/";
 				INFOPLIST_PREPROCESS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -452,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/EUExLocation.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EUExLocation/EUExLocation-Prefix.pch";
@@ -465,6 +436,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/EUExLocation.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EUExLocation/EUExLocation-Prefix.pch";

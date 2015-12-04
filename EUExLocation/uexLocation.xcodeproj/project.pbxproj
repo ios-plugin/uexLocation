@@ -16,10 +16,8 @@
 		3CAF585918C17C2200F9EB8D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAF585818C17C2200F9EB8D /* CoreTelephony.framework */; };
 		3CAF585B18C17C2800F9EB8D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAF585A18C17C2800F9EB8D /* MapKit.framework */; };
 		3CAF585D18C17C3400F9EB8D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CAF585C18C17C3400F9EB8D /* AudioToolbox.framework */; };
-		3CAF587018C17C5E00F9EB8D /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF586418C17C5E00F9EB8D /* EUExLocation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3CAF587118C17C5E00F9EB8D /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF586718C17C5E00F9EB8D /* Location.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3CAF587218C17C5E00F9EB8D /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF586D18C17C5E00F9EB8D /* SVGeocoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		3CAF587318C17C5E00F9EB8D /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF586F18C17C5E00F9EB8D /* SVPlacemark.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3CAF587018C17C5E00F9EB8D /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF586418C17C5E00F9EB8D /* EUExLocation.m */; };
+		3CAF587118C17C5E00F9EB8D /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CAF586718C17C5E00F9EB8D /* Location.m */; };
 		F728BA2019C99BE50009ED14 /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F728BA1F19C99BE50009ED14 /* JZLocationConverter.m */; };
 /* End PBXBuildFile section */
 
@@ -54,12 +52,6 @@
 		3CAF586418C17C5E00F9EB8D /* EUExLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUExLocation.m; path = EUExLocation/EUExLocation.m; sourceTree = SOURCE_ROOT; };
 		3CAF586618C17C5E00F9EB8D /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		3CAF586718C17C5E00F9EB8D /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
-		3CAF586A18C17C5E00F9EB8D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		3CAF586B18C17C5E00F9EB8D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		3CAF586C18C17C5E00F9EB8D /* SVGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGeocoder.h; sourceTree = "<group>"; };
-		3CAF586D18C17C5E00F9EB8D /* SVGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGeocoder.m; sourceTree = "<group>"; };
-		3CAF586E18C17C5E00F9EB8D /* SVPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlacemark.h; sourceTree = "<group>"; };
-		3CAF586F18C17C5E00F9EB8D /* SVPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlacemark.m; sourceTree = "<group>"; };
 		F728BA1E19C99BE50009ED14 /* JZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZLocationConverter.h; sourceTree = "<group>"; };
 		F728BA1F19C99BE50009ED14 /* JZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZLocationConverter.m; sourceTree = "<group>"; };
 		F7A53BE019C6853700CA9EEE /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -69,6 +61,7 @@
 		F7A53BE419C6853700CA9EEE /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		F7A53BE519C6853700CA9EEE /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		F7A53BE619C6853700CA9EEE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		F7C4BCAB1C115E0600D5A393 /* EBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBrowserView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +131,7 @@
 		3CAF585E18C17C5E00F9EB8D /* engineHeader */ = {
 			isa = PBXGroup;
 			children = (
+				F7C4BCAB1C115E0600D5A393 /* EBrowserView.h */,
 				3CAF586218C17C5E00F9EB8D /* EUExLocation-Prefix.pch */,
 				F7A53BE019C6853700CA9EEE /* JSON.h */,
 				F7A53BE119C6853700CA9EEE /* NSObject+SBJSON.h */,
@@ -161,32 +155,10 @@
 				F728BA1F19C99BE50009ED14 /* JZLocationConverter.m */,
 				3CAF586618C17C5E00F9EB8D /* Location.h */,
 				3CAF586718C17C5E00F9EB8D /* Location.m */,
-				3CAF586818C17C5E00F9EB8D /* SVGeocoder */,
 			);
 			name = sourceCode;
 			path = EUExLocation/sourceCode;
 			sourceTree = SOURCE_ROOT;
-		};
-		3CAF586818C17C5E00F9EB8D /* SVGeocoder */ = {
-			isa = PBXGroup;
-			children = (
-				3CAF586918C17C5E00F9EB8D /* JSONKit */,
-				3CAF586B18C17C5E00F9EB8D /* LICENSE.txt */,
-				3CAF586C18C17C5E00F9EB8D /* SVGeocoder.h */,
-				3CAF586D18C17C5E00F9EB8D /* SVGeocoder.m */,
-				3CAF586E18C17C5E00F9EB8D /* SVPlacemark.h */,
-				3CAF586F18C17C5E00F9EB8D /* SVPlacemark.m */,
-			);
-			path = SVGeocoder;
-			sourceTree = "<group>";
-		};
-		3CAF586918C17C5E00F9EB8D /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				3CAF586A18C17C5E00F9EB8D /* JSONKit.h */,
-			);
-			path = JSONKit;
-			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -239,8 +211,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CAF587218C17C5E00F9EB8D /* SVGeocoder.m in Sources */,
-				3CAF587318C17C5E00F9EB8D /* SVPlacemark.m in Sources */,
 				3CAF587118C17C5E00F9EB8D /* Location.m in Sources */,
 				F728BA2019C99BE50009ED14 /* JZLocationConverter.m in Sources */,
 				3CAF587018C17C5E00F9EB8D /* EUExLocation.m in Sources */,
@@ -283,7 +253,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
@@ -317,7 +287,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";

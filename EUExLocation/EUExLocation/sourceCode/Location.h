@@ -13,18 +13,22 @@
 
 @class EUExLocation;
 
-@interface Location : NSObject <CLLocationManagerDelegate,MKReverseGeocoderDelegate,MKMapViewDelegate>{
-	EUExLocation *euexObj;
-    CLLocationManager *gps;
-}
+@interface Location : NSObject <CLLocationManagerDelegate,MKReverseGeocoderDelegate,MKMapViewDelegate>
 
-@property(nonatomic,assign) EUExLocation *euexObj;
-@property(nonatomic,retain) CLLocationManager *gps;
-@property(nonatomic,retain) NSString *locationStr;
+
+@property(nonatomic, weak) EUExLocation *euexObj;
+
+@property(nonatomic, strong) CLLocationManager *gps;
+
+@property(nonatomic, strong) NSString *locationStr;
 
 -(id)initWithEuexObj:(EUExLocation *)euexObj_;
+
 -(void)getAddressWithLot:(NSString *)inLongitude Lat:(NSString *)inLatitude;
+
 -(void)openLocation:(NSMutableArray *)inArguments;
+
 -(void)closeLocation;
+
 @end
 

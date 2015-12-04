@@ -9,12 +9,16 @@
 #import "Location.h"
 #import "Reachability.h"
 #import "JZLocationConverter.h"
+
 @interface EUExLocation : EUExBase {
+    
 	double log;//经度
 	double lat;//纬度
-    Location *myLocation;
+    
 }
 
 -(void)uexLocationWithLot:(double)inLog Lat:(double)inLat ;
+
 -(void)uexLocationWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString *)inData;
+
 @end

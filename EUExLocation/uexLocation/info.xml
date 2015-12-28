@@ -2,7 +2,7 @@
 <uexplugins>
     <plugin
         uexName="uexLocation" version="3.0.23" build="23">
-        <info>22.添加IDE支持</info>
+        <info>23.添加IDE支持</info>
         <build>22.更改为ARC工程</build>
         <build>21.删除info.plist</build>
         <build>20.添加国际化支持</build>

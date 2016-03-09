@@ -458,7 +458,7 @@
 
 - (void)closeLocation {
     
-    NSLog(@"hui-->uexLocation-->Location-->closeLocation");
+    //NSLog(@"hui-->uexLocation-->Location-->closeLocation");
     
     if (gps) {
         

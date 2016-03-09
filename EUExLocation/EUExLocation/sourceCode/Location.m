@@ -36,15 +36,26 @@
         
         gps = [[CLLocationManager alloc] init];
         
-#ifdef __IPHONE_8_0
+        CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
         
-        if([[[UIDevice currentDevice] systemVersion]floatValue] >= 8.0) {
+        if(systemVersion >= 8.0) {
             
-            [gps requestWhenInUseAuthorization];
+            //[gps requestWhenInUseAuthorization];
+            [gps requestAlwaysAuthorization];
             
         }
+        BOOL backgroundLocation = NO;
+        NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+        NSArray *backgroundInfo = info[@"UIBackgroundModes"];
+        if (backgroundInfo && [backgroundInfo containsObject:@"location"]) {
+            backgroundLocation = YES;
+        }
+        if (systemVersion >= 9.0 && backgroundLocation) {
+            gps.allowsBackgroundLocationUpdates = YES;
+        }
         
-#endif
+        
+
         if (inArguments.count == 2) {
             
             if ([inArguments[0] intValue] == 0) {

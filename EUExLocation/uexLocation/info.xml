@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexLocation" version="3.0.23" build="23">
-        <info>23.添加IDE支持</info>
+        uexName="uexLocation" version="3.0.24" build="24">
+        <info>24.修改定位权限,支持后台定位</info>
+        <build>23.添加IDE支持</build>
         <build>22.更改为ARC工程</build>
         <build>21.删除info.plist</build>
         <build>20.添加国际化支持</build>

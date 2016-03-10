@@ -117,7 +117,7 @@
         LocationCoordinate2D.latitude = latitude;
         
         //转成百度坐标系
-        CLLocationCoordinate2D newCoordinate2D=[JZLocationConverter gcj02ToBd09:LocationCoordinate2D];
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToBd09:LocationCoordinate2D];
         
         NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.cbGetBaiduFromGoogle!=null){uexLocation.cbGetBaiduFromGoogle(%f,%f)}",newCoordinate2D.longitude,newCoordinate2D.latitude];
         

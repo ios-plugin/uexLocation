@@ -11,7 +11,7 @@
 		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
 		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
 		5A501961188FCFD20022E07C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* Location.m */; };
-		F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */; };
+		F7B3BCD719C95E55004CEAEC /* UexLocationJZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +58,8 @@
 		F7A53BDE19C6849500CA9EEE /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		F7A53BDF19C6849500CA9EEE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		F7ADC4C21999E71C00F63C09 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
-		F7B3BCD519C95E55004CEAEC /* JZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZLocationConverter.h; sourceTree = "<group>"; };
-		F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZLocationConverter.m; sourceTree = "<group>"; };
+		F7B3BCD519C95E55004CEAEC /* UexLocationJZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UexLocationJZLocationConverter.h; sourceTree = "<group>"; };
+		F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UexLocationJZLocationConverter.m; sourceTree = "<group>"; };
 		FC61C70118AB646900B2C1C5 /* EUExLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExLocation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,8 +159,8 @@
 		5A501956188FCFD20022E07C /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
-				F7B3BCD519C95E55004CEAEC /* JZLocationConverter.h */,
-				F7B3BCD619C95E55004CEAEC /* JZLocationConverter.m */,
+				F7B3BCD519C95E55004CEAEC /* UexLocationJZLocationConverter.h */,
+				F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */,
 				5A501957188FCFD20022E07C /* Location.h */,
 				5A501958188FCFD20022E07C /* Location.m */,
 			);
@@ -262,7 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A501961188FCFD20022E07C /* Location.m in Sources */,
-				F7B3BCD719C95E55004CEAEC /* JZLocationConverter.m in Sources */,
+				F7B3BCD719C95E55004CEAEC /* UexLocationJZLocationConverter.m in Sources */,
 				5A501934188FCF990022E07C /* EUExLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

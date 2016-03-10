@@ -1,12 +1,12 @@
 //
-//  JZLocationConverter.m
+//  UexLocationJZLocationConverter.m
 //  JZCLLocationMangerDome
 //
 //  Created by AppCan on 13-8-22.
 //  Copyright (c) 2013年 AppCan. All rights reserved.
 //
 
-#import "JZLocationConverter.h"
+#import "UexLocationJZLocationConverter.h"
 #import <CoreLocation/CoreLocation.h>
 #define LAT_OFFSET_0(x,y) -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x))
 #define LAT_OFFSET_1 (20.0 * sin(6.0 * x * M_PI) + 20.0 * sin(2.0 * x * M_PI)) * 2.0 / 3.0
@@ -30,7 +30,7 @@
 
 
 
-@implementation JZLocationConverter
+@implementation UexLocationJZLocationConverter
 
 + (double)transformLat:(double)x bdLon:(double)y
 {

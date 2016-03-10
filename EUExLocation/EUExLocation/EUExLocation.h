@@ -8,7 +8,7 @@
 #import "EUExBase.h"
 #import "Location.h"
 #import "Reachability.h"
-#import "JZLocationConverter.h"
+#import "UexLocationJZLocationConverter.h"
 
 @interface EUExLocation : EUExBase {
     

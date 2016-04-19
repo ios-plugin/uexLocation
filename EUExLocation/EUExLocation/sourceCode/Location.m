@@ -10,7 +10,7 @@
 //#import "SVGeocoder.h"
 #import "EUExLocation.h"
 #import "EUExBaseDefine.h"
-#import "JZLocationConverter.h"
+#import "UexLocationJZLocationConverter.h"
 #import "JSON.h"
 
 @implementation Location
@@ -116,7 +116,7 @@
     coordinate2D.latitude = newLocation.coordinate.latitude;
     
     //转成高德坐标系
-    CLLocationCoordinate2D newCoordinate2D=[JZLocationConverter wgs84ToGcj02:coordinate2D];
+    CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:coordinate2D];
     
     [euexObj uexLocationWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude ];
     
@@ -149,7 +149,7 @@
         LocationCoordinate2D.latitude = lat;
         
         //转成高德坐标系
-        CLLocationCoordinate2D newCoordinate2D=[JZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
         [euexObj uexLocationWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude ];
         
         NSMutableDictionary *locationDict=[NSMutableDictionary dictionary];

@@ -178,10 +178,10 @@
 //******************************由经纬度获取地址************************
 //ios6++
 
-- (void)getAddressWithLot:(NSString *)inLongitude Lat:(NSString *)inLatitude {
+- (void)getAddressWithLot:(double)inLongitude Lat:(double)inLatitude {
     
-    double lon = [inLongitude doubleValue];
-    double lat =[inLatitude doubleValue];
+    double lon = inLongitude;
+    double lat = inLatitude;
     
     //判断版本
     if([[[UIDevice currentDevice]systemVersion] floatValue]<6.0) {

@@ -24,7 +24,7 @@
 
 -(id)initWithEuexObj:(EUExLocation *)euexObj_;
 
--(void)getAddressWithLot:(NSString *)inLongitude Lat:(NSString *)inLatitude;
+-(void)getAddressWithLot:(double)inLongitude Lat:(double)inLatitude;
 
 -(void)openLocation:(NSMutableArray *)inArguments;
 

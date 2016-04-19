@@ -37,62 +37,53 @@
 - (void)openLocation:(NSMutableArray *)inArguments {
 
     if ([CLLocationManager locationServicesEnabled]) {
-        
-        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-            
-            // 当前程序未打开定位服务
-            [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
-            
-            return;
-            
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        switch (status) {
+            case kCLAuthorizationStatusNotDetermined:
+            case kCLAuthorizationStatusRestricted:
+            case kCLAuthorizationStatusDenied: {
+                // 当前程序未打开定位服务
+                [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+                return;
+            }
+            default: {
+                break;
+            }
         }
-        
     }
-    
     _myLocation = [[Location alloc] initWithEuexObj:self];
-    
     [_myLocation openLocation:inArguments];
     
 }
 
 - (void)closeLocation:(NSMutableArray *)inArguments {
-    
     if (_myLocation) {
-        
         [_myLocation closeLocation];
-        
     }
-    
 }
 
 - (void)getAddress:(NSMutableArray *)inArguments {
     
-    NSString *inLatitude = [inArguments objectAtIndex:0];
-    NSString *inLongitude = [inArguments objectAtIndex:1];
+    if (inArguments.count < 2) {
+        return;
+    }
+    double inLatitude = [[inArguments objectAtIndex:0] doubleValue];
+    double inLongitude = [[inArguments objectAtIndex:1] doubleValue];
     
     if ([inArguments count]>2) {
-        
         flage=[[inArguments objectAtIndex:2]intValue];
-        
     }
     
-    if (-90<[inLatitude intValue]<90||-180<[inLongitude intValue]<180) {
+    
+    if (![self isConnectionAvailable]){
         
-        if (![self isConnectionAvailable]){
-            
-            [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
-            
-        } else {
-            
-            [_myLocation getAddressWithLot:inLongitude Lat:inLatitude];
-            
-        }
+        [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         
     } else {
-        
-        [self jsFailedWithOpId:0 errorCode:1120201 errorDes:UEX_ERROR_DESCRIBE_ARGS];
-        
+        [_myLocation getAddressWithLot:inLongitude Lat:inLatitude];
     }
+    
+
     
 }
 
@@ -108,21 +99,15 @@
 - (void)getBaiduFromGoogle:(NSMutableArray *)inArguments {
     
     if(inArguments.count >1) {
-        
         double longitude = [[inArguments objectAtIndex:0] doubleValue];
         double latitude = [[inArguments objectAtIndex:1] doubleValue];
-        
         CLLocationCoordinate2D LocationCoordinate2D;
         LocationCoordinate2D.longitude =longitude;
         LocationCoordinate2D.latitude = latitude;
-        
         //转成百度坐标系
         CLLocationCoordinate2D newCoordinate2D=[JZLocationConverter gcj02ToBd09:LocationCoordinate2D];
-        
         NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.cbGetBaiduFromGoogle!=null){uexLocation.cbGetBaiduFromGoogle(%f,%f)}",newCoordinate2D.longitude,newCoordinate2D.latitude];
-        
-        [self.meBrwView stringByEvaluatingJavaScriptFromString:jsStr];
-        
+        [EUtility brwView:self.meBrwView evaluateScript:jsStr];
     }
     
 }
@@ -130,8 +115,8 @@
 - (void)uexLocationWithLot:(double)inLog Lat:(double)inLat {
     
     NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.onChange!=null){uexLocation.onChange(%f,%f)}",inLat,inLog];
-    
-    [self.meBrwView stringByEvaluatingJavaScriptFromString:jsStr];
+    [EUtility brwView:self.meBrwView evaluateScript:jsStr];
+
     
 }
 

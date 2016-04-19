@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexLocation" version="3.0.24" build="24">
-        <info>24.修改定位权限,支持后台定位</info>
+        uexName="uexLocation" version="3.0.25" build="25">
+        <info>25.修复3.3引擎下的参数问题;修复用户未决定是否支持定位时会回调可以定位的问题</info>
+        <build>24.修改定位权限,支持后台定位</build>
         <build>23.添加IDE支持</build>
         <build>22.更改为ARC工程</build>
         <build>21.删除info.plist</build>

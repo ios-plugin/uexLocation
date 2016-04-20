@@ -15,7 +15,7 @@
 
 @interface EUExLocation ()
 
-@property (nonatomic, strong) Location *myLocation;
+@property (nonatomic, strong) uexLocationObject *myLocation;
 
 @end
 
@@ -36,31 +36,50 @@
 
 - (void)openLocation:(NSMutableArray *)inArguments {
 
-    if ([CLLocationManager locationServicesEnabled]) {
-        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-        switch (status) {
-            case kCLAuthorizationStatusNotDetermined:
-            case kCLAuthorizationStatusRestricted:
-            case kCLAuthorizationStatusDenied: {
-                // 当前程序未打开定位服务
-                [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
-                return;
-            }
-            default: {
-                break;
-            }
+    
+    
+    
+    if (![CLLocationManager locationServicesEnabled]) {
+        [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+        return;
+    }
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:{
+            [self.myLocation requestLocationPermission:inArguments];
+            return;
+        }
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusDenied: {
+            // 当前程序未打开定位服务
+            [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+            return;
+        }
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse: {
+            [self.myLocation openLocation:inArguments];
+            break;
         }
     }
-    _myLocation = [[Location alloc] initWithEuexObj:self];
-    [_myLocation openLocation:inArguments];
     
 }
 
+
+
 - (void)closeLocation:(NSMutableArray *)inArguments {
-    if (_myLocation) {
-        [_myLocation closeLocation];
-    }
+
+        [self.myLocation closeLocation];
+    
 }
+
+- (uexLocationObject *)myLocation{
+    if (!_myLocation) {
+        _myLocation = [[uexLocationObject alloc] initWithEuexObj:self];
+    }
+    return _myLocation;
+    
+}
+
 
 - (void)getAddress:(NSMutableArray *)inArguments {
     
@@ -80,7 +99,7 @@
         [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         
     } else {
-        [_myLocation getAddressWithLot:inLongitude Lat:inLatitude];
+        [self.myLocation getAddressWithLot:inLongitude Lat:inLatitude];
     }
     
 

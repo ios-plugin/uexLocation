@@ -13,7 +13,7 @@
 
 @class EUExLocation;
 
-@interface Location : NSObject <CLLocationManagerDelegate,MKReverseGeocoderDelegate,MKMapViewDelegate>
+@interface uexLocationObject : NSObject <CLLocationManagerDelegate>
 
 
 @property(nonatomic, weak) EUExLocation *euexObj;
@@ -29,6 +29,8 @@
 -(void)openLocation:(NSMutableArray *)inArguments;
 
 -(void)closeLocation;
+
+- (void)requestLocationPermission:(NSMutableArray *)inArguments;
 
 @end
 

@@ -6,7 +6,7 @@
 //  Copyright 2011 AppCan. All rights reserved.
 //
 #import "EUExBase.h"
-#import "Location.h"
+#import "uexLocationObject.h"
 #import "Reachability.h"
 #import "UexLocationJZLocationConverter.h"
 
@@ -20,5 +20,8 @@
 -(void)uexLocationWithLot:(double)inLog Lat:(double)inLat ;
 
 -(void)uexLocationWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString *)inData;
+
+
+
 
 @end

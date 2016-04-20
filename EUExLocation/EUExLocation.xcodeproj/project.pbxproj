@@ -10,7 +10,7 @@
 		3C1C09C41BE0624200571E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C1C09C61BE0624200571E72 /* Localizable.strings */; };
 		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
 		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
-		5A501961188FCFD20022E07C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* Location.m */; };
+		5A501961188FCFD20022E07C /* uexLocationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* uexLocationObject.m */; };
 		F7B3BCD719C95E55004CEAEC /* UexLocationJZLocationConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +47,8 @@
 		5A501953188FCFD20022E07C /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
 		5A501954188FCFD20022E07C /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
 		5A501955188FCFD20022E07C /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
-		5A501957188FCFD20022E07C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		5A501958188FCFD20022E07C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		5A501957188FCFD20022E07C /* uexLocationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uexLocationObject.h; sourceTree = "<group>"; };
+		5A501958188FCFD20022E07C /* uexLocationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uexLocationObject.m; sourceTree = "<group>"; };
 		F71D523D1C0EEE1F00CB4E57 /* EBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBrowserView.h; sourceTree = "<group>"; };
 		F7A53BD919C6849500CA9EEE /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
@@ -161,8 +161,8 @@
 			children = (
 				F7B3BCD519C95E55004CEAEC /* UexLocationJZLocationConverter.h */,
 				F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */,
-				5A501957188FCFD20022E07C /* Location.h */,
-				5A501958188FCFD20022E07C /* Location.m */,
+				5A501957188FCFD20022E07C /* uexLocationObject.h */,
+				5A501958188FCFD20022E07C /* uexLocationObject.m */,
 			);
 			path = sourceCode;
 			sourceTree = "<group>";
@@ -211,7 +211,7 @@
 		5A501921188FCF990022E07C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = xll;
 				TargetAttributes = {
 					3C1AD5AD1BD60E9E0091D2A1 = {
@@ -261,7 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A501961188FCFD20022E07C /* Location.m in Sources */,
+				5A501961188FCFD20022E07C /* uexLocationObject.m in Sources */,
 				F7B3BCD719C95E55004CEAEC /* UexLocationJZLocationConverter.m in Sources */,
 				5A501934188FCF990022E07C /* EUExLocation.m in Sources */,
 			);
@@ -343,7 +343,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -359,6 +358,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CONFIGURATION_BUILD_DIR = "$(SRCROOT)/uexLocation/";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -376,7 +376,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/uexLocation/";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -385,7 +385,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -421,7 +420,6 @@
 		5A50194D188FCF9A0022E07C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/EUExLocation.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -435,7 +433,6 @@
 		5A50194E188FCF9A0022E07C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/EUExLocation.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

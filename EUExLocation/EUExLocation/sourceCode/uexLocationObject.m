@@ -44,8 +44,9 @@
 
 - (void)requestLocationPermission:(NSMutableArray *)inArguments{
     CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
+    self.requestedForPermission = YES;
     if(systemVersion >= 8.0) {
-        self.requestedForPermission = YES;
+        
         self.requestedArguments = inArguments;
         [self.gps requestAlwaysAuthorization];
     }else{
@@ -56,16 +57,29 @@
     if (!self.requestedForPermission) {
         return;
     }
-    CLAuthorizationStatus newStatus = [CLLocationManager authorizationStatus];
-    if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [self openLocation:self.requestedArguments];
-        
-    }else{
-        [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
-        
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined: {
+            return;
+        }
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusDenied: {
+            [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+            break;
+        }
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse: {
+            CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
+            if(systemVersion >= 8.0){
+                [self openLocation:self.requestedArguments];
+            }else{
+                [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
+            }
+            break;
+        }
     }
-    self.requestedArguments = nil;
     self.requestedForPermission = NO;
+    self.requestedArguments = nil;
+   
 }
 
 
@@ -139,8 +153,11 @@
     
     
     [self.gps startUpdatingLocation];
+    CLAuthorizationStatus newStatus = [CLLocationManager authorizationStatus];
+    if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
+        [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
+    }
     
-    [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
     
 }
 

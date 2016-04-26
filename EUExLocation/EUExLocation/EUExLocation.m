@@ -132,6 +132,45 @@
     }
     
 }
+-(NSString*)convertLocation:(NSMutableArray *)inArguments{
+    if (inArguments.count < 1) {
+        return nil;
+    }
+    id info = [inArguments[0] JSONValue];
+    double latitude = [[info objectForKey:@"latitude"] doubleValue];
+    double longitude = [[info objectForKey:@"longitude"] doubleValue];
+    CLLocationCoordinate2D LocationCoordinate2D;
+    LocationCoordinate2D.longitude =longitude;
+    LocationCoordinate2D.latitude = latitude;
+    NSString *from = [[info objectForKey:@"from"] lowercaseString];
+    NSString *to = [[info objectForKey:@"to"] lowercaseString];
+    if ([from isEqual:@"wgs84"] && [to isEqual:@"gcj02"]) {
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+    }
+    if ([from isEqual:@"gcj02"] && [to isEqual:@"wgs84"]) {
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToWgs84:LocationCoordinate2D];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+    }
+    if ([from isEqual:@"wgs84"] && [to isEqual:@"bd09"]) {
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToBd09:LocationCoordinate2D];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+    }
+    if ([from isEqual:@"bd09"] && [to isEqual:@"wgs84"]) {
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter bd09ToWgs84:LocationCoordinate2D];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+    }
+    if ([from isEqual:@"bd09"] && [to isEqual:@"gcj02"]) {
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter bd09ToGcj02:LocationCoordinate2D];
+        NSLog(@"%@",@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)});
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+    }
+    if ([from isEqual:@"gcj02"] && [to isEqual:@"bd09"]) {
+        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToBd09:LocationCoordinate2D];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+    }
+    return nil;
+}
 
 - (void)uexLocationWithLot:(double)inLog Lat:(double)inLat {
     

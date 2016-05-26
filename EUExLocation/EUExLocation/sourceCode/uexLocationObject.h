@@ -30,7 +30,7 @@
 
 -(void)closeLocation;
 
-- (void)requestLocationPermission:(NSMutableArray *)inArguments;
+- (void)requestPermissionThenOpenLocation:(NSMutableArray *)inArguments;
 
 @end
 

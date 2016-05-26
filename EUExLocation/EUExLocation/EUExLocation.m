@@ -46,7 +46,7 @@
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     switch (status) {
         case kCLAuthorizationStatusNotDetermined:{
-            [self.myLocation requestLocationPermission:inArguments];
+            [self.myLocation requestPermissionThenOpenLocation:inArguments];
             return;
         }
         case kCLAuthorizationStatusRestricted:

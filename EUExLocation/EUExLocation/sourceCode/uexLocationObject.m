@@ -42,13 +42,13 @@
     return _gps;
 }
 
-- (void)requestLocationPermission:(NSMutableArray *)inArguments{
+- (void)requestPermissionThenOpenLocation:(NSMutableArray *)inArguments{
     CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
     self.requestedForPermission = YES;
     if(systemVersion >= 8.0) {
         
         self.requestedArguments = inArguments;
-        [self.gps requestAlwaysAuthorization];
+        [self requestPermission];
     }else{
         [self openLocation:inArguments];
     }
@@ -83,6 +83,25 @@
 }
 
 
+
+- (void)requestPermission{
+    if ([self needBackgroundLocation]) {
+        [self.gps requestAlwaysAuthorization];
+    }else{
+        [self.gps requestWhenInUseAuthorization];
+    }
+}
+
+- (BOOL)needBackgroundLocation{
+    BOOL backgroundLocation = NO;
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSArray *backgroundInfo = info[@"UIBackgroundModes"];
+    if (backgroundInfo && [backgroundInfo containsObject:@"location"]) {
+        backgroundLocation = YES;
+    }
+    return backgroundLocation;
+}
+
 - (void)openLocation:(NSMutableArray *)inArguments {
     
     
@@ -91,22 +110,12 @@
     CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
     
     if(systemVersion >= 8.0) {
-        
-        //[gps requestWhenInUseAuthorization];
-        [self.gps requestAlwaysAuthorization];
-        
+        [self requestPermission];
     }
-    BOOL backgroundLocation = NO;
-    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSArray *backgroundInfo = info[@"UIBackgroundModes"];
-    if (backgroundInfo && [backgroundInfo containsObject:@"location"]) {
-        backgroundLocation = YES;
-    }
+    BOOL backgroundLocation = [self needBackgroundLocation];
     if (systemVersion >= 9.0 && backgroundLocation) {
         self.gps.allowsBackgroundLocationUpdates = YES;
     }
-    
-    
     
     if (inArguments.count == 2) {
         

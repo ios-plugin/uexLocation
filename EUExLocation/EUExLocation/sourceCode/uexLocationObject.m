@@ -7,7 +7,6 @@
 //
 #import "EUtility.h"
 #import "uexLocationObject.h"
-//#import "SVGeocoder.h"
 #import "EUExLocation.h"
 #import "EUExBaseDefine.h"
 #import "UexLocationJZLocationConverter.h"
@@ -63,7 +62,9 @@
         }
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied: {
-            [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+            //[self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+            [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
+            [self.func executeWithArguments:ACArgsPack(@0,@2,@1)];
             break;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -72,7 +73,9 @@
             if(systemVersion >= 8.0){
                 [self openLocation:self.requestedArguments];
             }else{
-                [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
+               // [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
+                 [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@0)];
+                [self.func executeWithArguments:ACArgsPack(@0,@2,@0)];
             }
             break;
         }
@@ -102,11 +105,9 @@
     return backgroundLocation;
 }
 
-- (void)openLocation:(NSMutableArray *)inArguments {
-    
+- (void)openLocation:(NSMutableArray *)inArguments{
     
 
-    
     CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
     
     if(systemVersion >= 8.0) {
@@ -162,9 +163,11 @@
     
     
     [self.gps startUpdatingLocation];
-    CLAuthorizationStatus newStatus = [CLLocationManager authorizationStatus];
+    CLAuthorizationStatus newStatus =[CLLocationManager authorizationStatus];
     if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
+        //[self.euexObj jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:0];
+        [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@0)];
+        [self.func executeWithArguments:ACArgsPack(@0,@2,@0)];
     }
     
     
@@ -203,8 +206,10 @@
         
     } else {
         
-        [self.euexObj jsSuccessWithName:@"uexLocation.onChange" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"获取经纬度失败")];
-        
+        //[self.euexObj jsSuccessWithName:@"uexLocation.onChange" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"获取经纬度失败")];
+        NSString *failedStr = UEX_LOCALIZEDSTRING(@"获取经纬度失败");
+        [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@1,@0,failedStr)];
+        [self.func executeWithArguments:ACArgsPack(@1,@0,failedStr)];
     }
     
 }
@@ -343,6 +348,7 @@
             if(self.euexObj&&[self.euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]){
                 
                 [self.euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
+
                 
             }
             

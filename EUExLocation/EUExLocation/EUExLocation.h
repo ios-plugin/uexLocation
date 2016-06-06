@@ -5,7 +5,7 @@
 //  Created by AppCan on 11-9-7.
 //  Copyright 2011 AppCan. All rights reserved.
 //
-#import "EUExBase.h"
+
 #import "uexLocationObject.h"
 #import "Reachability.h"
 #import "UexLocationJZLocationConverter.h"

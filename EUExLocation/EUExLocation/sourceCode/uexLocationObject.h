@@ -22,6 +22,8 @@
 
 @property(nonatomic, strong) NSString *locationStr;
 
+@property(nonatomic,strong)ACJSFunctionRef *func;
+
 -(id)initWithEuexObj:(EUExLocation *)euexObj_;
 
 -(void)getAddressWithLot:(double)inLongitude Lat:(double)inLatitude;

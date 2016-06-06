@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0947D2F81D0127DD00419276 /* AppCanKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0947D2F71D0127DD00419276 /* AppCanKit.framework */; };
 		3C1C09C41BE0624200571E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C1C09C61BE0624200571E72 /* Localizable.strings */; };
 		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
 		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
@@ -37,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0947D2F71D0127DD00419276 /* AppCanKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCanKit.framework; sourceTree = "<group>"; };
 		3C1AD5AE1BD60E9E0091D2A1 /* uexLocation.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = uexLocation.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1C09C51BE0624200571E72 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3C1C09C71BE0624300571E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -44,7 +46,6 @@
 		5A50192C188FCF990022E07C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A501930188FCF990022E07C /* EUExLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EUExLocation-Prefix.pch"; sourceTree = "<group>"; };
 		5A501933188FCF990022E07C /* EUExLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExLocation.m; sourceTree = "<group>"; };
-		5A501953188FCFD20022E07C /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
 		5A501954188FCFD20022E07C /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
 		5A501955188FCFD20022E07C /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
 		5A501957188FCFD20022E07C /* uexLocationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uexLocationObject.h; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0947D2F81D0127DD00419276 /* AppCanKit.framework in Frameworks */,
 				5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +151,6 @@
 				F7A53BDE19C6849500CA9EEE /* SBJsonParser.h */,
 				F7A53BDF19C6849500CA9EEE /* SBJsonWriter.h */,
 				F7ADC4C21999E71C00F63C09 /* Reachability.h */,
-				5A501953188FCFD20022E07C /* EUExBase.h */,
 				5A501954188FCFD20022E07C /* EUExBaseDefine.h */,
 				5A501955188FCFD20022E07C /* EUtility.h */,
 			);
@@ -159,6 +160,7 @@
 		5A501956188FCFD20022E07C /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				0947D2F71D0127DD00419276 /* AppCanKit.framework */,
 				F7B3BCD519C95E55004CEAEC /* UexLocationJZLocationConverter.h */,
 				F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */,
 				5A501957188FCFD20022E07C /* uexLocationObject.h */,
@@ -422,6 +424,10 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/EUExLocation.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExLocation/sourceCode",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EUExLocation/EUExLocation-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
@@ -435,6 +441,10 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/EUExLocation.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EUExLocation/sourceCode",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EUExLocation/EUExLocation-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";

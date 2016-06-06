@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <uexplugins>
     <plugin
-        uexName="uexLocation" version="4.0.27" build="27">
-        <info>27.在应用不支持后台定位时,只会请求仅使用中进行定位的权限</info>
+        uexName="uexLocation" version="4.0.0" build="28">
+        <info>28.支持引擎4.0</info>
+        <build>27.在应用不支持后台定位时,只会请求仅使用中进行定位的权限</build>
         <build>26.新增坐标转换接口</build>
         <build>25.修复3.3引擎下的参数问题;修复用户未决定是否支持定位时会回调可以定位的问题</build>
         <build>24.修改定位权限,支持后台定位</build>

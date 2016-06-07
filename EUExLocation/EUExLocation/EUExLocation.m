@@ -33,7 +33,7 @@
     if (![CLLocationManager locationServicesEnabled]) {
         //[self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
         [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-        [func executeWithArguments:ACArgsPack(@0,@2,@1)];
+        [func executeWithArguments:ACArgsPack(@1)];
         return;
     }
     CLAuthorizationStatus status =[CLLocationManager authorizationStatus];
@@ -47,7 +47,7 @@
             // 当前程序未打开定位服务
             //[self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
              [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-             [func executeWithArguments:ACArgsPack(@0,@2,@1)];
+             [func executeWithArguments:ACArgsPack(@1)];
             return;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -95,7 +95,7 @@
         //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         NSString *str = UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络");
         [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@1,@0,str)];
-        [func executeWithArguments:ACArgsPack(@1,@0,str)];
+        [func executeWithArguments:ACArgsPack(str)];
         
     } else {
         [self.myLocation getAddressWithLot:inLongitude Lat:inLatitude];
@@ -224,7 +224,7 @@
             
             //NSString *adrStr = [NSString stringWithFormat:@"uexLocation.cbGetAddress(\"%d\",\"%d\",\"%@\")",inOpId,inDataType,adr];
             [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@(inOpId),@(inDataType),adr)];
-            [self.funcGetAddress executeWithArguments:ACArgsPack(@(inOpId),@(inDataType),adr)];
+            [self.funcGetAddress executeWithArguments:ACArgsPack(adr)];
             //[self.meBrwView stringByEvaluatingJavaScriptFromString:adrStr];
             
         }

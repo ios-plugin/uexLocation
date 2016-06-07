@@ -217,7 +217,7 @@
             
             //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:0 dataType:UEX_CALLBACK_DATATYPE_JSON strData:json];
             [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@0,@1,json)];
-            [self.funcGetAddress executeWithArguments:ACArgsPack(@0,@1,json)];
+            [self.funcGetAddress executeWithArguments:ACArgsPack(json)];
         } else {
             
             NSString *adr=[jsonDict objectForKey:@"formatted_address"];

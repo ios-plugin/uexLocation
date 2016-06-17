@@ -16,8 +16,7 @@
 @interface EUExLocation ()
 
 @property (nonatomic, strong) uexLocationObject *myLocation;
-@property(nonatomic,strong)ACJSFunctionRef *funcGetAddress;
-@property(nonatomic,strong)ACJSFunctionRef *funcOpenLocation;
+
 @end
 
 @implementation EUExLocation {
@@ -25,29 +24,35 @@
     int flage;
 }
 
+- (id)initWithBrwView:(EBrowserView *) eInBrwView {
+    
+    if (self = [super initWithBrwView:eInBrwView]) {
+        
+    }
+    
+    return self;
+    
+}
 
 - (void)openLocation:(NSMutableArray *)inArguments {
-    ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
-    self.myLocation.func = func;
-    self.funcOpenLocation = func;
+
+    
+    
+    
     if (![CLLocationManager locationServicesEnabled]) {
-        //[self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
-        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-        [func executeWithArguments:ACArgsPack(@1)];
+        [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
         return;
     }
-    CLAuthorizationStatus status =[CLLocationManager authorizationStatus];
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     switch (status) {
         case kCLAuthorizationStatusNotDetermined:{
             [self.myLocation requestPermissionThenOpenLocation:inArguments];
             return;
-        }     
+        }
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied: {
             // 当前程序未打开定位服务
-            //[self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
-             [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-             [func executeWithArguments:ACArgsPack(@1)];
+            [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
             return;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -64,8 +69,7 @@
 - (void)closeLocation:(NSMutableArray *)inArguments {
 
         [self.myLocation closeLocation];
-         self.funcOpenLocation = nil;
-         self.funcGetAddress = nil;
+    
 }
 
 - (uexLocationObject *)myLocation{
@@ -78,24 +82,21 @@
 
 
 - (void)getAddress:(NSMutableArray *)inArguments {
-    ACArgsUnpack(NSNumber*latitude,NSNumber*longitude,NSNumber*flag,ACJSFunctionRef *func) = inArguments;
-    self.funcGetAddress = func;
+    
     if (inArguments.count < 2) {
         return;
     }
-    double inLatitude = [latitude doubleValue];
-    double inLongitude = [longitude doubleValue];
+    double inLatitude = [[inArguments objectAtIndex:0] doubleValue];
+    double inLongitude = [[inArguments objectAtIndex:1] doubleValue];
+    
     if ([inArguments count]>2) {
-        flage=[flag intValue];
+        flage=[[inArguments objectAtIndex:2]intValue];
     }
     
     
     if (![self isConnectionAvailable]){
         
-        //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
-        NSString *str = UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络");
-        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@1,@0,str)];
-        [func executeWithArguments:ACArgsPack(str)];
+        [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         
     } else {
         [self.myLocation getAddressWithLot:inLongitude Lat:inLatitude];
@@ -124,10 +125,10 @@
         LocationCoordinate2D.latitude = latitude;
         //转成百度坐标系
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToBd09:LocationCoordinate2D];
+        
 
-        //NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.cbGetBaiduFromGoogle!=null){uexLocation.cbGetBaiduFromGoogle(%f,%f)}",newCoordinate2D.longitude,newCoordinate2D.latitude];
-        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetBaiduFromGoogle" arguments:ACArgsPack(@(newCoordinate2D.longitude),@(newCoordinate2D.latitude))];
-        //[EUtility brwView:self.meBrwView evaluateScript:jsStr];
+        NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.cbGetBaiduFromGoogle!=null){uexLocation.cbGetBaiduFromGoogle(%f,%f)}",newCoordinate2D.longitude,newCoordinate2D.latitude];
+        [EUtility brwView:self.meBrwView evaluateScript:jsStr];
     }
     
 }
@@ -173,11 +174,9 @@
 
 - (void)uexLocationWithLot:(double)inLog Lat:(double)inLat {
     
-    //NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.onChange!=null){uexLocation.onChange(%f,%f)}",inLat,inLog];
-    [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.onChange" arguments:ACArgsPack(@(inLat),@(inLog))];
-    [self.funcOpenLocation executeWithArguments:ACArgsPack(@(inLat),@(inLog))];
-    //[EUtility brwView:self.meBrwView evaluateScript:jsStr];
- 
+    NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.onChange!=null){uexLocation.onChange(%f,%f)}",inLat,inLog];
+    [EUtility brwView:self.meBrwView evaluateScript:jsStr];
+
     
 }
 
@@ -215,17 +214,14 @@
             
             NSString *json=[jsonDict JSONFragment];
             
-            //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:0 dataType:UEX_CALLBACK_DATATYPE_JSON strData:json];
-            [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@0,@1,json)];
-            [self.funcGetAddress executeWithArguments:ACArgsPack(json)];
+            [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:0 dataType:UEX_CALLBACK_DATATYPE_JSON strData:json];
+            
         } else {
             
             NSString *adr=[jsonDict objectForKey:@"formatted_address"];
+            NSString *adrStr = [NSString stringWithFormat:@"uexLocation.cbGetAddress(\"%d\",\"%d\",\"%@\")",inOpId,inDataType,adr];
             
-            //NSString *adrStr = [NSString stringWithFormat:@"uexLocation.cbGetAddress(\"%d\",\"%d\",\"%@\")",inOpId,inDataType,adr];
-            [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@(inOpId),@(inDataType),adr)];
-            [self.funcGetAddress executeWithArguments:ACArgsPack(adr)];
-            //[self.meBrwView stringByEvaluatingJavaScriptFromString:adrStr];
+            [self.meBrwView stringByEvaluatingJavaScriptFromString:adrStr];
             
         }
         

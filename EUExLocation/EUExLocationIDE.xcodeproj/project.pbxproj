@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		276CA3D75A541501FE3197B2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E6B4EA9202B0C7E8DDD3EC /* AudioToolbox.framework */; };
 		3C1C09C41BE0624200571E72 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3C1C09C61BE0624200571E72 /* Localizable.strings */; };
+		4247F3581D5183C700D316C1 /* uexLocationObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4247F3561D5183C700D316C1 /* uexLocationObject.m */; };
 		44EC8E0D2D8FF0BEC1A7B9EB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8DE3F64DAB4D1B6BD8BC35 /* MobileCoreServices.framework */; };
 		47F299A688AD1296DB115444 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E31D6BBFCA52D1644110AC8 /* UIKit.framework */; };
 		4982F2E74100937096A49A47 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F25FB699861AF37D38937AEA /* libstdc++.tbd */; };
@@ -16,7 +17,6 @@
 		4F5DDF0AD404C1744A78C30C /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87985774F997854040C727DE /* ImageIO.framework */; };
 		5A50192D188FCF990022E07C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A50192C188FCF990022E07C /* Foundation.framework */; };
 		5A501934188FCF990022E07C /* EUExLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501933188FCF990022E07C /* EUExLocation.m */; };
-		5A501961188FCFD20022E07C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A501958188FCFD20022E07C /* Location.m */; };
 		82D9E6FB07A0F2962F961CD1 /* uexLocation.bundle in Resources */ = {isa = PBXBuildFile; fileRef = EA7ECDD81F4CB4B49D94A55A /* uexLocation.bundle */; };
 		9E1B3B7A336AF01CF8E671FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F860F2972B22A6AA8658178A /* CoreGraphics.framework */; };
 		BA2BD41F152577AE7B8F8B5E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8A7F6F7B65A1597B5E1831 /* QuartzCore.framework */; };
@@ -59,6 +59,8 @@
 		3C1C09C71BE0624300571E72 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		3DF66CE011C7EFB14AEC19F8 /* CFNetWork.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = CFNetWork.framework; path = System/Library/Frameworks/CFNetWork.framework; sourceTree = SDKROOT; };
 		3E0B5AF82FD1309828DCA409 /* libz.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = archive.ar; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4247F3561D5183C700D316C1 /* uexLocationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uexLocationObject.m; sourceTree = "<group>"; };
+		4247F3571D5183C700D316C1 /* uexLocationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uexLocationObject.h; sourceTree = "<group>"; };
 		5A501929188FCF990022E07C /* uexLocation.framework */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = uexLocation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A50192C188FCF990022E07C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5A501930188FCF990022E07C /* EUExLocation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EUExLocation-Prefix.pch"; sourceTree = "<group>"; };
@@ -66,8 +68,6 @@
 		5A501953188FCFD20022E07C /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBase.h; sourceTree = "<group>"; };
 		5A501954188FCFD20022E07C /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUExBaseDefine.h; sourceTree = "<group>"; };
 		5A501955188FCFD20022E07C /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUtility.h; sourceTree = "<group>"; };
-		5A501957188FCFD20022E07C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
-		5A501958188FCFD20022E07C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		6B766FA07B7AC15F9F077AA9 /* MapKit.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6CC1A602258704CEF6198AFD /* AppCanEngine.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = AppCanEngine.framework; path = "../../../AppCanPluginTools-iOS/resource/IDEPluginProjectPackageResource/AppCanEngine.framework"; sourceTree = "<group>"; };
 		6E8A7F6F7B65A1597B5E1831 /* QuartzCore.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -216,10 +216,10 @@
 		5A501956188FCFD20022E07C /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				4247F3561D5183C700D316C1 /* uexLocationObject.m */,
+				4247F3571D5183C700D316C1 /* uexLocationObject.h */,
 				F74EB6CB1C917B22005E877F /* UexLocationJZLocationConverter.h */,
 				F74EB6CC1C917B22005E877F /* UexLocationJZLocationConverter.m */,
-				5A501957188FCFD20022E07C /* Location.h */,
-				5A501958188FCFD20022E07C /* Location.m */,
 			);
 			path = sourceCode;
 			sourceTree = "<group>";
@@ -347,7 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A501961188FCFD20022E07C /* Location.m in Sources */,
+				4247F3581D5183C700D316C1 /* uexLocationObject.m in Sources */,
 				5A501934188FCF990022E07C /* EUExLocation.m in Sources */,
 				F74EB6CD1C917B22005E877F /* UexLocationJZLocationConverter.m in Sources */,
 			);

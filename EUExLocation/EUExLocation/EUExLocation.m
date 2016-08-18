@@ -75,7 +75,7 @@
     
 }
 
-
+/** 已废弃,请用新接口getAddressByType**/
 - (void)getAddress:(NSMutableArray *)inArguments {
     ACArgsUnpack(NSNumber*latitude,NSNumber*longitude,NSNumber*flag,ACJSFunctionRef *func) = inArguments;
     self.funcGetAddress = func;
@@ -94,7 +94,6 @@
         //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         NSString *str = UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络");
         [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@1,@0,str)];
-        [func executeWithArguments:ACArgsPack(str)];
         
     } else {
         [self.myLocation getAddressWithLot:inLongitude Lat:inLatitude];
@@ -121,7 +120,7 @@
         //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
         NSString *str = UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络");
         [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@1,@0,str)];
-        [func executeWithArguments:ACArgsPack(str)];
+        [func executeWithArguments:ACArgsPack(@(1),str)];
         
     } else {
         CLLocationCoordinate2D LocationCoordinate2D;
@@ -255,14 +254,14 @@
             
             //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:0 dataType:UEX_CALLBACK_DATATYPE_JSON strData:json];
             [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@0,@1,json)];
-            [self.funcGetAddress executeWithArguments:ACArgsPack(json)];
+            [self.funcGetAddress executeWithArguments:ACArgsPack(@(0),jsonDict)];
         } else {
             
             NSString *adr=[jsonDict objectForKey:@"formatted_address"];
             
             //NSString *adrStr = [NSString stringWithFormat:@"uexLocation.cbGetAddress(\"%d\",\"%d\",\"%@\")",inOpId,inDataType,adr];
             [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@(inOpId),@(inDataType),adr)];
-            [self.funcGetAddress executeWithArguments:ACArgsPack(adr)];
+            [self.funcGetAddress executeWithArguments:ACArgsPack(@(0),adr)];
             //[self.meBrwView stringByEvaluatingJavaScriptFromString:adrStr];
             
         }

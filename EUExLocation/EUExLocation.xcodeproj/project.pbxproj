@@ -51,13 +51,6 @@
 		5A501957188FCFD20022E07C /* uexLocationObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uexLocationObject.h; sourceTree = "<group>"; };
 		5A501958188FCFD20022E07C /* uexLocationObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = uexLocationObject.m; sourceTree = "<group>"; };
 		F71D523D1C0EEE1F00CB4E57 /* EBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBrowserView.h; sourceTree = "<group>"; };
-		F7A53BD919C6849500CA9EEE /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
-		F7A53BDB19C6849500CA9EEE /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		F7A53BDC19C6849500CA9EEE /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
-		F7A53BDD19C6849500CA9EEE /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
-		F7A53BDE19C6849500CA9EEE /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		F7A53BDF19C6849500CA9EEE /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		F7ADC4C21999E71C00F63C09 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
 		F7B3BCD519C95E55004CEAEC /* UexLocationJZLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UexLocationJZLocationConverter.h; sourceTree = "<group>"; };
 		F7B3BCD619C95E55004CEAEC /* UexLocationJZLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UexLocationJZLocationConverter.m; sourceTree = "<group>"; };
@@ -143,13 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				F71D523D1C0EEE1F00CB4E57 /* EBrowserView.h */,
-				F7A53BD919C6849500CA9EEE /* JSON.h */,
-				F7A53BDA19C6849500CA9EEE /* NSObject+SBJSON.h */,
-				F7A53BDB19C6849500CA9EEE /* NSString+SBJSON.h */,
-				F7A53BDC19C6849500CA9EEE /* SBJSON.h */,
-				F7A53BDD19C6849500CA9EEE /* SBJsonBase.h */,
-				F7A53BDE19C6849500CA9EEE /* SBJsonParser.h */,
-				F7A53BDF19C6849500CA9EEE /* SBJsonWriter.h */,
 				F7ADC4C21999E71C00F63C09 /* Reachability.h */,
 				5A501954188FCFD20022E07C /* EUExBaseDefine.h */,
 				5A501955188FCFD20022E07C /* EUtility.h */,

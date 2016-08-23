@@ -10,11 +10,12 @@
 #import "EUExLocation.h"
 #import "EUExBaseDefine.h"
 #import "UexLocationJZLocationConverter.h"
-#import "JSON.h"
+
 
 @interface uexLocationObject()
 @property (nonatomic,assign)BOOL requestedForPermission;
 @property (nonatomic,strong)NSMutableArray *requestedArguments;
+@property (nonatomic,strong)NSString *type;
 @end
 
 @implementation uexLocationObject
@@ -106,8 +107,8 @@
 }
 
 - (void)openLocation:(NSMutableArray *)inArguments{
-    
-
+    ACArgsUnpack(NSString *type) = inArguments;
+    self.type = type?[type lowercaseString]:nil;
     CGFloat systemVersion = [[[UIDevice currentDevice] systemVersion]floatValue];
     
     if(systemVersion >= 8.0) {
@@ -117,51 +118,8 @@
     if (systemVersion >= 9.0 && backgroundLocation) {
         self.gps.allowsBackgroundLocationUpdates = YES;
     }
-    
-    if (inArguments.count == 2) {
-        
-        if ([inArguments[0] intValue] == 0) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyBest;
-            
-        }
-        
-        if ([inArguments[0] intValue] == 1) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyNearestTenMeters;
-            
-        }
-        
-        if ([inArguments[0] intValue]==2) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyHundredMeters;
-            
-        }
-        
-        if ([inArguments[0] intValue]==3) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyKilometer;
-            
-        }
-        
-        if ([inArguments[0] intValue]==4) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyThreeKilometers;
-            
-        }
-        
-        self.gps.distanceFilter=[inArguments[1] floatValue];
-        
-    } else {
-        
-        self.gps.desiredAccuracy = kCLLocationAccuracyBest;
-        self.gps.distanceFilter = 3.0f;
-        
-    }
-    
-    
-    
-    
+    self.gps.desiredAccuracy = kCLLocationAccuracyBest;
+    self.gps.distanceFilter = 3.0f;//更新距离
     [self.gps startUpdatingLocation];
     CLAuthorizationStatus newStatus =[CLLocationManager authorizationStatus];
     if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
@@ -192,24 +150,36 @@
         CLLocationCoordinate2D LocationCoordinate2D;
         LocationCoordinate2D.longitude =log;
         LocationCoordinate2D.latitude = lat;
+        NSLog(@"type:%@",self.type);
         
-        //转成高德坐标系
-        CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
-        [self.euexObj uexLocationWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude ];
+            //世界标准地理坐标转成高德坐标系
+            CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
+            //世界标准地理坐标转化为百度坐标系
+            if ([self.type isEqualToString:@"bd09"]) {
+                newCoordinate2D = [UexLocationJZLocationConverter wgs84ToBd09:LocationCoordinate2D];
+            }
+            //世界标准地理坐标
+            if ([self.type isEqualToString:@"wgs84"]) {
+                newCoordinate2D = LocationCoordinate2D;
+            }
+            
+            
+            [self.euexObj uexLocationWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude ];
+            NSMutableDictionary *locationDict=[NSMutableDictionary dictionary];
+            
+            [locationDict setObject:[NSString stringWithFormat:@"%f",newCoordinate2D.latitude] forKey:@"lat"];
+            [locationDict setObject:[NSString stringWithFormat:@"%f",newCoordinate2D.longitude] forKey:@"lng"];
+            
+            self.locationStr = [locationDict ac_JSONFragment];
         
-        NSMutableDictionary *locationDict=[NSMutableDictionary dictionary];
         
-        [locationDict setObject:[NSString stringWithFormat:@"%f",newCoordinate2D.latitude] forKey:@"lat"];
-        [locationDict setObject:[NSString stringWithFormat:@"%f",newCoordinate2D.longitude] forKey:@"lng"];
         
-        self.locationStr = [locationDict JSONFragment];
         
     } else {
         
         //[self.euexObj jsSuccessWithName:@"uexLocation.onChange" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"获取经纬度失败")];
         NSString *failedStr = UEX_LOCALIZEDSTRING(@"获取经纬度失败");
-        [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@1,@0,failedStr)];
-        [self.func executeWithArguments:ACArgsPack(failedStr)];
+        [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.onChange" arguments:ACArgsPack(@1,@0,failedStr)];
     }
     
 }
@@ -244,7 +214,7 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *array,NSError *error) {
-        
+        NSLog(@"array:%@",array);
         if (array.count > 0) {
             
             CLPlacemark *placemark = [array objectAtIndex:0];
@@ -341,7 +311,7 @@
                 
             }
             
-            address = [addressDict JSONFragment];
+            address = [addressDict ac_JSONFragment];
             addressAll = [NSString stringWithFormat:@"%@;%@;%@",getAddress,_locationStr,address];
             
             //对象是否实现了某个方法
@@ -360,130 +330,6 @@
     //}
     
 }
-/*
-- (void)startedReverseGeoderWithLatitude:(double)latitude longitude:(double)longitude {
- 
-    CLLocationCoordinate2D coordinate2D;
-    coordinate2D.longitude = longitude;
-    coordinate2D.latitude = latitude;
- 
-    MKReverseGeocoder *geoCoder = [[MKReverseGeocoder alloc] initWithCoordinate:coordinate2D];
- 
-    geoCoder.delegate = self;
- 
-    [geoCoder start];
- 
-}
-
-//ios6--
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
-    
-    NSString *address =	@"";
-    NSString *addressAll = @"";
-    NSString *city = @"";
-    
-    NSString *getAddress=[NSString stringWithFormat:@"%@",placemark.country];
-    
-    if (KUEX_IS_NSString(placemark.administrativeArea)) {
-        
-        getAddress=[getAddress stringByAppendingString:placemark.administrativeArea];
-        
-    }
-    
-    if (KUEX_IS_NSString(placemark.subAdministrativeArea)) {
-        
-        getAddress=[getAddress stringByAppendingString:placemark.subAdministrativeArea];
-        
-    }
-    
-    if (KUEX_IS_NSString(placemark.locality)) {
-        
-        getAddress=[getAddress stringByAppendingString: placemark.locality];
-        
-    }
-    
-    if (KUEX_IS_NSString(placemark.subLocality)) {
-        
-        getAddress=[getAddress stringByAppendingString:placemark.subLocality];
-        
-    }
-    
-    if (KUEX_IS_NSString(placemark.thoroughfare)) {
-        
-        getAddress=[getAddress stringByAppendingString:placemark.thoroughfare];
-        
-    }
-    
-    if (KUEX_IS_NSString(placemark.subThoroughfare)) {
-        
-        getAddress=[getAddress stringByAppendingString:placemark.subThoroughfare];
-        
-    }
-    
-    if (KUEX_IS_NSString(placemark.locality)) {
-        
-        city = [NSString stringWithFormat:@"%@",placemark.locality];
-        
-    }
-    
-    if([self isBeiJingCity:placemark.administrativeArea]) {
-        
-        if (KUEX_IS_NSString(placemark.administrativeArea)) {
-            
-            city = [NSString stringWithFormat:@"%@",placemark.administrativeArea];
-            
-        }
-        
-    }
-    
-    NSMutableDictionary *addressDict=[NSMutableDictionary dictionary];
-    
-    if(placemark.administrativeArea){
-        
-        [addressDict setObject:placemark.administrativeArea forKey:@"province"];
-        
-    }
-    
-    if (placemark.subThoroughfare) {
-        
-        [addressDict setObject:placemark.subThoroughfare forKey:@"street_number"];
-        
-    } else {
-        
-        [addressDict setObject:@"(null)" forKey:@"street_number"];
-        
-    }
-    
-    if (placemark.subLocality) {
-        
-        [addressDict setObject:placemark.subLocality forKey:@"district"];
-        
-    }
-    
-    if (placemark.thoroughfare) {
-        
-        [addressDict setObject:placemark.thoroughfare forKey:@"street"];
-        
-    }
-    
-    if (city) {
-        
-        [addressDict setObject:city forKey:@"city"];
-        
-    }
-    
-    address = [addressDict JSONFragment];
-    
-    addressAll = [NSString stringWithFormat:@"%@;%@;%@",getAddress,_locationStr,address];
-    
-    if (euexObj&&[euexObj respondsToSelector:@selector(uexLocationWithOpId:dataType:data:)]) {
-        
-        [euexObj uexLocationWithOpId:0 dataType:UEX_CALLBACK_DATATYPE_TEXT data:addressAll];
-        
-    }
-    
-}
-*/
 - (BOOL)isBeiJingCity:(NSString *)city {
     
     if ([city hasPrefix:UEX_LOCALIZEDSTRING(@"北京")]) {

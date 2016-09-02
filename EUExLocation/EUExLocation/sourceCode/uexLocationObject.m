@@ -16,6 +16,7 @@
 @interface uexLocationObject()
 @property (nonatomic,assign)BOOL requestedForPermission;
 @property (nonatomic,strong)NSMutableArray *requestedArguments;
+@property (nonatomic,strong)NSString *type;
 @end
 
 @implementation uexLocationObject
@@ -117,50 +118,16 @@
         self.gps.allowsBackgroundLocationUpdates = YES;
     }
     
-    if (inArguments.count == 2) {
+    if (inArguments.count == 1) {
+        self.type = inArguments[0];
+        NSLog(@"type:%@",self.type);
         
-        if ([inArguments[0] intValue] == 0) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyBest;
-            
-        }
         
-        if ([inArguments[0] intValue] == 1) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyNearestTenMeters;
-            
-        }
-        
-        if ([inArguments[0] intValue]==2) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyHundredMeters;
-            
-        }
-        
-        if ([inArguments[0] intValue]==3) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyKilometer;
-            
-        }
-        
-        if ([inArguments[0] intValue]==4) {
-            
-            self.gps.desiredAccuracy=kCLLocationAccuracyThreeKilometers;
-            
-        }
-        
-        self.gps.distanceFilter=[inArguments[1] floatValue];
-        
-    } else {
-        
+    }
         self.gps.desiredAccuracy = kCLLocationAccuracyBest;
         self.gps.distanceFilter = 3.0f;
         
-    }
-    
-    
-    
-    
+      
     [self.gps startUpdatingLocation];
     CLAuthorizationStatus newStatus = [CLLocationManager authorizationStatus];
     if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
@@ -190,8 +157,19 @@
         LocationCoordinate2D.longitude =log;
         LocationCoordinate2D.latitude = lat;
         
-        //转成高德坐标系
+        
+        //世界标准地理坐标转成高德坐标系
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
+        //世界标准地理坐标转化为百度坐标系
+        if ([self.type.lowercaseString  isEqualToString:@"bd09"]) {
+            newCoordinate2D = [UexLocationJZLocationConverter wgs84ToBd09:LocationCoordinate2D];
+            NSLog(@"我是百度坐标系");
+        }
+        //世界标准地理坐标
+        if ([self.type.lowercaseString isEqualToString:@"wgs84"]) {
+            newCoordinate2D = LocationCoordinate2D;
+            NSLog(@"我是世界标准地理坐标");
+        }
         [self.euexObj uexLocationWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude ];
         
         NSMutableDictionary *locationDict=[NSMutableDictionary dictionary];

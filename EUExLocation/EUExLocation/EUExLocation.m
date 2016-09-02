@@ -102,7 +102,46 @@
         [self.myLocation getAddressWithLot:inLongitude Lat:inLatitude];
     }
     
-
+    
+    
+}
+- (void)getAddressByType:(NSMutableArray *)inArguments{
+    
+    if (inArguments.count < 1) {
+        return;
+    }
+    id infoDic = inArguments[0];
+    if (!infoDic || ![infoDic isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
+    double inLatitude = [infoDic[@"latitude"] doubleValue];
+    double inLongitude =[infoDic[@"longitude"] doubleValue];
+    flage= [infoDic[@"flag"] intValue];
+    NSString *type = infoDic[@"type"]? [infoDic[@"type"] lowercaseString]:nil;
+    NSLog(@"flag:%d",flage);
+    
+    if (![self isConnectionAvailable]){
+        
+        [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
+        
+    } else {
+        CLLocationCoordinate2D LocationCoordinate2D;
+        LocationCoordinate2D.longitude = inLongitude;
+        LocationCoordinate2D.latitude = inLatitude;
+        
+        CLLocationCoordinate2D newCoordinate2D = LocationCoordinate2D;
+        //百度坐标系转为世界标准地理坐标
+        if ([type isEqualToString:@"bd09"]) {
+            newCoordinate2D = [UexLocationJZLocationConverter bd09ToWgs84:LocationCoordinate2D];
+        }
+        //高德坐标系转为世界标准地理坐标
+        if ([type isEqualToString:@"gcj02"]) {
+            newCoordinate2D = [UexLocationJZLocationConverter gcj02ToWgs84:LocationCoordinate2D];
+        }
+        [self.myLocation getAddressWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude];
+    }
+    
+    
     
 }
 

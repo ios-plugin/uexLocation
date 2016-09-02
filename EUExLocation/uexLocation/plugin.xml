@@ -6,5 +6,6 @@
         <method name="closeLocation"></method>
         <method name="getBaiduFromGoogle"></method>
         <method name="convertLocation" sync = "true"></method>
+        <method name="getAddressByType"></method>
 	</plugin>
 </uexplugins>

@@ -110,9 +110,13 @@
     if (inArguments.count < 1) {
         return;
     }
-    id infoDic = inArguments[0];
-    if (!infoDic || ![infoDic isKindOfClass:[NSDictionary class]]) {
-        return;
+    id info = inArguments[0];
+    NSDictionary *infoDic = nil;
+    if(info && [info isKindOfClass:[NSString class]] ){
+        infoDic = [info JSONValue];
+    }
+    if(info && [info isKindOfClass:[NSDictionary class]] ){
+        infoDic = info;
     }
     double inLatitude = [infoDic[@"latitude"] doubleValue];
     double inLongitude =[infoDic[@"longitude"] doubleValue];

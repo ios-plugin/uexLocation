@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <uexplugins>
-  <plugin uexName="uexLocation" version="3.0.30" build="30">
-    <info>30: getAddressByType兼容String</info>
+  <plugin uexName="uexLocation" version="3.0.31" build="31">
+    <info>31: 移除默认的定位权限配置</info>
+    <build>30: getAddressByType兼容String</build>
     <build>29: 增加getAddressByType</build>
     <build>28: IDE证书更新</build>
     <build>27: 在应用不支持后台定位时,只会请求仅使用中进行定位的权限</build>

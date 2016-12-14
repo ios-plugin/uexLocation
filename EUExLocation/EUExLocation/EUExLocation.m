@@ -7,32 +7,21 @@
 //
 
 #import "EUExLocation.h"
-#import "EUtility.h"
-#import "EUExBaseDefine.h"
-#import "EBrowserView.h"
-#import "SBJSON.h"
-#import "JSON.h"
+
+
+
 
 @interface EUExLocation ()
 
-@property (nonatomic, strong) uexLocationObject *myLocation;
-
+@property (nonatomic,strong) uexLocationObject *myLocation;
+@property (nonatomic,strong) ACJSFunctionRef *getAddressCallback;
 @end
 
 @implementation EUExLocation {
-    
     int flage;
 }
 
-- (id)initWithBrwView:(EBrowserView *) eInBrwView {
-    
-    if (self = [super initWithBrwView:eInBrwView]) {
-        
-    }
-    
-    return self;
-    
-}
+
 
 - (void)openLocation:(NSMutableArray *)inArguments {
 
@@ -40,7 +29,8 @@
     
     
     if (![CLLocationManager locationServicesEnabled]) {
-        [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
+
         return;
     }
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
@@ -52,7 +42,7 @@
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied: {
             // 当前程序未打开定位服务
-            [self jsSuccessWithName:@"uexLocation.cbOpenLocation" opId:0  dataType:UEX_CALLBACK_DATATYPE_INT intData:1];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
             return;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -80,7 +70,7 @@
     
 }
 
-
+/** 已废弃,请用新接口getAddressByType**/
 - (void)getAddress:(NSMutableArray *)inArguments {
     
     if (inArguments.count < 2) {
@@ -95,9 +85,8 @@
     
     
     if (![self isConnectionAvailable]){
-        
-        [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
-        
+        NSString *str = UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络");
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@1,@0,str)];
     } else {
         [self.myLocation getAddressWithLot:inLongitude Lat:inLatitude];
     }
@@ -105,28 +94,26 @@
     
     
 }
-- (void)getAddressByType:(NSMutableArray *)inArguments{
-    
+
+- (void)getAddressByType:(NSMutableArray *)inArguments {
+    ACArgsUnpack(NSDictionary *infoDic) = inArguments;
+    ACJSFunctionRef *func = ac_JSFunctionArg(inArguments.lastObject);
+    self.getAddressCallback = func;
     if (inArguments.count < 1) {
         return;
-    }
-    id info = inArguments[0];
-    NSDictionary *infoDic = nil;
-    if(info && [info isKindOfClass:[NSString class]] ){
-        infoDic = [info JSONValue];
-    }
-    if(info && [info isKindOfClass:[NSDictionary class]] ){
-        infoDic = info;
     }
     double inLatitude = [infoDic[@"latitude"] doubleValue];
     double inLongitude =[infoDic[@"longitude"] doubleValue];
     flage= [infoDic[@"flag"] intValue];
     NSString *type = infoDic[@"type"]? [infoDic[@"type"] lowercaseString]:nil;
-    NSLog(@"flag:%d",flage);
+
     
     if (![self isConnectionAvailable]){
         
-        [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
+        //[self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:1 dataType:UEX_CALLBACK_DATATYPE_TEXT strData:UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络")];
+        NSString *str = UEX_LOCALIZEDSTRING(@"无网络连接,请检查你的网络");
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@1,@0,str)];
+        [func executeWithArguments:ACArgsPack(@(1),str)];
         
     } else {
         CLLocationCoordinate2D LocationCoordinate2D;
@@ -148,7 +135,6 @@
     
     
 }
-
 /**
  *	@brief	中国国测局地理坐标（GCJ-02）<火星坐标> 转换成 百度地理坐标（BD-09)
  *
@@ -168,18 +154,16 @@
         LocationCoordinate2D.latitude = latitude;
         //转成百度坐标系
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToBd09:LocationCoordinate2D];
-        
+        [self.webViewEngine callbackWithFunctionKeyPath:@"cbGetBaiduFromGoogle" arguments:ACArgsPack(@(newCoordinate2D.longitude),@(newCoordinate2D.latitude))];
 
-        NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.cbGetBaiduFromGoogle!=null){uexLocation.cbGetBaiduFromGoogle(%f,%f)}",newCoordinate2D.longitude,newCoordinate2D.latitude];
-        [EUtility brwView:self.meBrwView evaluateScript:jsStr];
     }
     
 }
--(NSString*)convertLocation:(NSMutableArray *)inArguments{
+- (NSString *)convertLocation:(NSMutableArray *)inArguments{
     if (inArguments.count < 1) {
         return nil;
     }
-    id info = [inArguments[0] JSONValue];
+    id info = [inArguments[0] ac_JSONValue];
     double latitude = [[info objectForKey:@"latitude"] doubleValue];
     double longitude = [[info objectForKey:@"longitude"] doubleValue];
     CLLocationCoordinate2D LocationCoordinate2D;
@@ -189,85 +173,78 @@
     NSString *to = [[info objectForKey:@"to"] lowercaseString];
     if ([from isEqual:@"wgs84"] && [to isEqual:@"gcj02"]) {
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
-        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} ac_JSONFragment];
     }
     if ([from isEqual:@"gcj02"] && [to isEqual:@"wgs84"]) {
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToWgs84:LocationCoordinate2D];
-        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} ac_JSONFragment];
     }
     if ([from isEqual:@"wgs84"] && [to isEqual:@"bd09"]) {
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter wgs84ToBd09:LocationCoordinate2D];
-        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)}  ac_JSONFragment];
     }
     if ([from isEqual:@"bd09"] && [to isEqual:@"wgs84"]) {
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter bd09ToWgs84:LocationCoordinate2D];
-        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} ac_JSONFragment];
     }
     if ([from isEqual:@"bd09"] && [to isEqual:@"gcj02"]) {
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter bd09ToGcj02:LocationCoordinate2D];
         NSLog(@"%@",@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)});
-        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} ac_JSONFragment];
     }
     if ([from isEqual:@"gcj02"] && [to isEqual:@"bd09"]) {
         CLLocationCoordinate2D newCoordinate2D=[UexLocationJZLocationConverter gcj02ToBd09:LocationCoordinate2D];
-        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} JSONFragment];
+        return [@{@"latitude":@(newCoordinate2D.latitude),@"longitude":@(newCoordinate2D.longitude)} ac_JSONFragment];
     }
     return nil;
 }
 
 - (void)uexLocationWithLot:(double)inLog Lat:(double)inLat {
     
-    NSString *jsStr = [NSString stringWithFormat:@"if(uexLocation.onChange!=null){uexLocation.onChange(%f,%f)}",inLat,inLog];
-    [EUtility brwView:self.meBrwView evaluateScript:jsStr];
-
-    
+    [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.onChange" arguments:ACArgsPack(@(inLog),@(inLat))];
 }
 
 //地址回调
 - (void)uexLocationWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString *)inData {
+    if(!inData){
+        return;
+    }
     
-    if (inData) {
+    
+    NSMutableArray *array=(NSMutableArray *)[inData componentsSeparatedByString:@";"];
+    NSMutableDictionary *jsonDict=[NSMutableDictionary dictionary];
+    NSArray *arrayKey=[NSArray arrayWithObjects:@"formatted_address",@"location",@"addressComponent",nil];
+    
+    NSString *key = nil;
+    NSString *value = nil;
+    
+    for (int i=0;i<[array count] ; i++) {
         
-        NSMutableArray *array=(NSMutableArray *)[inData componentsSeparatedByString:@";"];
-        NSMutableDictionary *jsonDict=[NSMutableDictionary dictionary];
-        NSArray *arrayKey=[NSArray arrayWithObjects:@"formatted_address",@"location",@"addressComponent",nil];
+        key=[NSString stringWithFormat:@"%@",[arrayKey objectAtIndex:i]];
         
-        NSString *key = nil;
-        NSString *value = nil;
-        
-        for (int i=0;i<[array count] ; i++) {
+        if (i==0) {
             
-            key=[NSString stringWithFormat:@"%@",[arrayKey objectAtIndex:i]];
-            
-            if (i==0) {
-                
-                value =[NSString stringWithFormat:@"%@",[array objectAtIndex:i]];
-                [jsonDict setValue:value forKey:key];
-                
-            } else {
-                
-                NSMutableDictionary * valueDic =[[array objectAtIndex:i] JSONValue];
-                [jsonDict setValue:valueDic forKey:key];
-                
-            }
-            
-        }
-        
-        if (flage==1) {
-            
-            NSString *json=[jsonDict JSONFragment];
-            
-            [self jsSuccessWithName:@"uexLocation.cbGetAddress" opId:0 dataType:UEX_CALLBACK_DATATYPE_JSON strData:json];
+            value =[NSString stringWithFormat:@"%@",[array objectAtIndex:i]];
+            [jsonDict setValue:value forKey:key];
             
         } else {
             
-            NSString *adr=[jsonDict objectForKey:@"formatted_address"];
-            NSString *adrStr = [NSString stringWithFormat:@"uexLocation.cbGetAddress(\"%d\",\"%d\",\"%@\")",inOpId,inDataType,adr];
-            
-            [self.meBrwView stringByEvaluatingJavaScriptFromString:adrStr];
+            NSMutableDictionary * valueDic =[[array objectAtIndex:i] ac_JSONValue];
+            [jsonDict setValue:valueDic forKey:key];
             
         }
         
+    }
+    
+    if (flage == 1) {
+        NSString *json=[jsonDict ac_JSONFragment];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@0,@1,json)];
+        [self.getAddressCallback executeWithArguments:ACArgsPack(@(0),jsonDict)];
+        
+    } else {
+         NSString *adr=[jsonDict objectForKey:@"formatted_address"];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbGetAddress" arguments:ACArgsPack(@(inOpId),@(inDataType),adr)];
+        [self.getAddressCallback executeWithArguments:ACArgsPack(@(0),adr)];
     }
     
 }

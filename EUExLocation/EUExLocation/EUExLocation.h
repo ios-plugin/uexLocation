@@ -17,6 +17,8 @@
     
 }
 
+@property(nonatomic,assign)BOOL isJudgeLct;//是否拥有定位权限
+
 -(void)uexLocationWithLot:(double)inLog Lat:(double)inLat ;
 
 -(void)uexLocationWithOpId:(int)inOpId dataType:(int)inDataType data:(NSString *)inData;

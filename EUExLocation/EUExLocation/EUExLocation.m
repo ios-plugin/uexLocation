@@ -13,6 +13,8 @@
 
 @interface EUExLocation ()
 
+@property(nonatomic,assign)BOOL isJudgeLct;//是否拥有定位权限
+
 @property (nonatomic,strong) uexLocationObject *myLocation;
 @property (nonatomic,strong) ACJSFunctionRef *getAddressCallback;
 @end
@@ -21,12 +23,62 @@
     int flage;
 }
 
-
+#pragma mark - 定位权限判断
+- (BOOL)judgeLocation
+{
+    self.isJudgeLct = NO;
+    CLAuthorizationStatus authStatus = [CLLocationManager authorizationStatus];
+    switch (authStatus) {
+        case kCLAuthorizationStatusNotDetermined://没有询问是否开启定位
+        {
+            //            __weak EUExImage *weakSelf = self;
+            //            //第一次询问用户是否进行授权
+            //            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            //                // CALL YOUR METHOD HERE - as this assumes being called only once from user interacting with permission alert!
+            //                if (status == PHAuthorizationStatusAuthorized) {
+            //                    // Photo enabled code
+            //                    weakSelf.isJudgePic = YES;
+            //                }
+            //                else {
+            //                    // Photo disabled code
+            //                    weakSelf.isJudgePic = NO;
+            //                }
+            //            }];
+            self.isJudgeLct = YES;
+        }
+            break;
+        case kCLAuthorizationStatusRestricted:
+            //未授权，家长限制
+            self.isJudgeLct = NO;
+            break;
+        case kCLAuthorizationStatusDenied:
+            //用户未授权
+            self.isJudgeLct = NO;
+            break;
+        case kCLAuthorizationStatusAuthorizedAlways:
+            //用户授权
+            self.isJudgeLct = YES;
+            break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            //用户授权
+            self.isJudgeLct = YES;
+        default:
+            break;
+    }
+    
+    return self.isJudgeLct;
+}
 
 - (void)openLocation:(NSMutableArray *)inArguments {
-
     
-    
+    //定位权限检测
+    BOOL isLocationOK = [self judgeLocation];
+    if (!isLocationOK) {
+        NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"errCode",@"定位失败，请在 设置-隐私-定位服务 中开启权限",@"info", nil];
+        NSString *dataStr = [dicResult ac_JSONFragment];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.onPermissionDenied" arguments:ACArgsPack(dataStr)];
+        return;
+    }
     
     if (![CLLocationManager locationServicesEnabled]) {
         [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
@@ -102,6 +154,16 @@
     if (inArguments.count < 1) {
         return;
     }
+    
+    //定位权限检测
+    BOOL isLocationOK = [self judgeLocation];
+    if (!isLocationOK) {
+        NSDictionary *dicResult = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"errCode",@"定位失败，请在 设置-隐私-定位服务 中开启权限",@"info", nil];
+        NSString *dataStr = [dicResult ac_JSONFragment];
+        [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.onPermissionDenied" arguments:ACArgsPack(dataStr)];
+        return;
+    }
+    
     double inLatitude = [infoDic[@"latitude"] doubleValue];
     double inLongitude =[infoDic[@"longitude"] doubleValue];
     flage= [infoDic[@"flag"] intValue];
@@ -121,14 +183,19 @@
         LocationCoordinate2D.latitude = inLatitude;
         
         CLLocationCoordinate2D newCoordinate2D = LocationCoordinate2D;
-        //百度坐标系转为世界标准地理坐标
+        //百度坐标系转为世界标准地理坐标======>百度坐标系转为高德坐标
         if ([type isEqualToString:@"bd09"]) {
-            newCoordinate2D = [UexLocationJZLocationConverter bd09ToWgs84:LocationCoordinate2D];
+            newCoordinate2D = [UexLocationJZLocationConverter bd09ToGcj02:LocationCoordinate2D];
         }
-        //高德坐标系转为世界标准地理坐标
-        if ([type isEqualToString:@"gcj02"]) {
-            newCoordinate2D = [UexLocationJZLocationConverter gcj02ToWgs84:LocationCoordinate2D];
+        //高德坐标系转为世界标准地理坐标======>高德坐标系不转换
+//        if ([type isEqualToString:@"gcj02"]) {
+//            newCoordinate2D = [UexLocationJZLocationConverter gcj02ToWgs84:LocationCoordinate2D];
+//        }
+        //世界标准地理坐标转为高德坐标系
+        if ([type isEqualToString:@"wgs84"]) {
+            newCoordinate2D = [UexLocationJZLocationConverter wgs84ToGcj02:LocationCoordinate2D];
         }
+        
         [self.myLocation getAddressWithLot:newCoordinate2D.longitude Lat:newCoordinate2D.latitude];
     }
     

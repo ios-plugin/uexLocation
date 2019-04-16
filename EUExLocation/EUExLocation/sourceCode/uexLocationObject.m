@@ -143,9 +143,9 @@
         NSString *locationStr1=[NSString stringWithFormat:@"%@",locationAry0[0]];
         NSString *locationStr2=[locationStr1 substringFromIndex:1];
         NSArray *locationAry1=[locationStr2 componentsSeparatedByString:@","];
-        double lat=[[locationAry1 objectAtIndex:0] doubleValue];
-        double log=[[locationAry1 objectAtIndex:1] doubleValue];
-        
+        double lat=[[locationAry1 objectAtIndex:1] doubleValue];
+        double log=[[locationAry1 objectAtIndex:0] doubleValue];
+        NSLog(@"uexLocationObject didUpdateLocations:%@",locationAry1);
         CLLocationCoordinate2D LocationCoordinate2D;
         LocationCoordinate2D.longitude =log;
         LocationCoordinate2D.latitude = lat;

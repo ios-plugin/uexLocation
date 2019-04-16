@@ -63,7 +63,7 @@
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied: {
             [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-            
+            [self.func executeWithArguments:ACArgsPack(@(-1))];
             break;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -73,6 +73,7 @@
                 [self openLocation:self.requestedArguments];
             }else{
                 [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@0)];
+                [self.func executeWithArguments:ACArgsPack(@(0))];
             }
             break;
         }
@@ -124,6 +125,7 @@
     CLAuthorizationStatus newStatus = [CLLocationManager authorizationStatus];
     if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@0)];
+        [self.func executeWithArguments:ACArgsPack(@0)];
     }
     
     

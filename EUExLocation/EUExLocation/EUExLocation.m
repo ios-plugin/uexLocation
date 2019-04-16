@@ -70,7 +70,8 @@
 }
 
 - (void)openLocation:(NSMutableArray *)inArguments {
-    
+    ACJSFunctionRef *func = JSFunctionArg(inArguments.lastObject);
+    self.myLocation.func = func;
     //定位权限检测
     BOOL isLocationOK = [self judgeLocation];
     if (!isLocationOK) {
@@ -82,7 +83,7 @@
     
     if (![CLLocationManager locationServicesEnabled]) {
         [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-
+        [func executeWithArguments:ACArgsPack(@(-1))];
         return;
     }
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
@@ -95,6 +96,7 @@
         case kCLAuthorizationStatusDenied: {
             // 当前程序未打开定位服务
             [self.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
+            [func executeWithArguments:ACArgsPack(@(-1))];
             return;
         }
         case kCLAuthorizationStatusAuthorizedAlways:

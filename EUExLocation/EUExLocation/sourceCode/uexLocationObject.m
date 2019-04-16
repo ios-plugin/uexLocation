@@ -63,7 +63,7 @@
         case kCLAuthorizationStatusRestricted:
         case kCLAuthorizationStatusDenied: {
             [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@1)];
-            
+            [self.func executeWithArguments:ACArgsPack(@(-1))];
             break;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
@@ -73,6 +73,7 @@
                 [self openLocation:self.requestedArguments];
             }else{
                 [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@0)];
+                [self.func executeWithArguments:ACArgsPack(@(0))];
             }
             break;
         }
@@ -124,6 +125,7 @@
     CLAuthorizationStatus newStatus = [CLLocationManager authorizationStatus];
     if (newStatus == kCLAuthorizationStatusAuthorizedAlways || newStatus ==kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.euexObj.webViewEngine callbackWithFunctionKeyPath:@"uexLocation.cbOpenLocation" arguments:ACArgsPack(@0,@2,@0)];
+        [self.func executeWithArguments:ACArgsPack(@0)];
     }
     
     
@@ -141,9 +143,9 @@
         NSString *locationStr1=[NSString stringWithFormat:@"%@",locationAry0[0]];
         NSString *locationStr2=[locationStr1 substringFromIndex:1];
         NSArray *locationAry1=[locationStr2 componentsSeparatedByString:@","];
-        double lat=[[locationAry1 objectAtIndex:0] doubleValue];
-        double log=[[locationAry1 objectAtIndex:1] doubleValue];
-        
+        double lat=[[locationAry1 objectAtIndex:1] doubleValue];
+        double log=[[locationAry1 objectAtIndex:0] doubleValue];
+        NSLog(@"uexLocationObject didUpdateLocations:%@",locationAry1);
         CLLocationCoordinate2D LocationCoordinate2D;
         LocationCoordinate2D.longitude =log;
         LocationCoordinate2D.latitude = lat;
